@@ -6,6 +6,7 @@
 #' @param reps - an integer specifying the number of simulations. The default is set to 10,000
 #'     which is appropriate for exploratory analysis. A higher number of simulations
 #'     should be selected for final analysis.
+
 #'
 #' @return
 #' @export
@@ -25,6 +26,7 @@ chisq_gof <- function(x,
                       reps = 10000)  {
 
   out <- chisq_gof_cpp(x, y, reps)
+
 
   return(out)
 

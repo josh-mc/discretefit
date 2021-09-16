@@ -91,6 +91,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_discretefit_ors_gof_cpp", (DL_FUNC) &_discretefit_ors_gof_cpp, 3},
     {"_discretefit_rms_stat", (DL_FUNC) &_discretefit_rms_stat, 2},
     {"_discretefit_rms_gof_cpp", (DL_FUNC) &_discretefit_rms_gof_cpp, 3},
+
     {NULL, NULL, 0}
 };
 

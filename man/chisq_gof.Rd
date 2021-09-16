@@ -19,13 +19,16 @@ chisq_gof(x, y, reps = 10000)
 \item an integer specifying the number of simulations. The default is set to 10,000
 which is appropriate for exploratory analysis. A higher number of simulations
 should be selected for final analysis.
+
 }}
 }
 \value{
 
 }
 \description{
+
 Simulated p-values for Chi Squared goodness-of-fit
+
 }
 \examples{
 x <- c(rep(1, 15), rep(2, 5))
