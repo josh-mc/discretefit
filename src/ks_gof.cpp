@@ -1,8 +1,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// [[Rcpp::export]]
-
 NumericVector compute_vec_1_frac(IntegerVector vector_1,
                                  IntegerVector uni_2,
                                  int n_bins,
