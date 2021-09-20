@@ -55,7 +55,7 @@ double rms_mod(IntegerVector vector_1,
     y += x[i];
   }
 
-  double rms = y / uni_2.size();
+  double rms = sqrt(y / uni_2.size());
 
   return rms;
 }
@@ -85,7 +85,7 @@ double rms_gof_cpp(NumericVector vector_1,
     y += x[i];
   }
 
-  double rms_statistic = y / vec_2_frac.size();
+  double rms_statistic = sqrt(y / vec_2_frac.size());
 
   int n_bins = vec_2_frac.size();
   IntegerVector uni_2 = seq_len(n_bins);

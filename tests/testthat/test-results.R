@@ -17,8 +17,8 @@ test_that("chisq_gof equal to chisq.test", {
 
 test_that("chisq_gof equal to rms_gof for uniform distribution", {
 
-  x <- c(14, 18, 12, 13)
-  p <- c(0.2, 0.2, 0.2, 0.2)
+  x <- c(14, 18, 12, 13, 15)
+  p <- c(0.2, 0.2, 0.2, 0.2, 0.2)
 
   set.seed(40)
   a <- chisq_gof(x, p)
@@ -46,7 +46,6 @@ test_that("ks_gof equal to ks.test (from dgof package)", {
   expect_equal(tolerance = 0.001, a, b)
 
 })
-
 
 
 

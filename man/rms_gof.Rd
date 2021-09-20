@@ -4,14 +4,14 @@
 \alias{rms_gof}
 \title{Simulated p-values for root mean squared goodness-of-fit}
 \usage{
-rms_gof(x, y, reps = 10000)
+rms_gof(x, p, reps = 10000)
 }
 \arguments{
 \item{x}{\itemize{
 \item a numeric vector.
 }}
 
-\item{y}{\itemize{
+\item{p}{\itemize{
 \item a numeric vector representing the reference distribution.
 }}
 
@@ -28,9 +28,9 @@ should be selected for final analysis.
 Simulated p-values for root mean squared goodness-of-fit
 }
 \examples{
-x <- c(rep(1, 15), rep(2, 5))
-y <- c(1, 2)
+x <- c(15, 36, 17)
+p <- c(0.25, 0.5, 0.25)
 
-rms_gof(x, y, reps = 10000)
+rms_gof(x, p)
 
 }
