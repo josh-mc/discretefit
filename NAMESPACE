@@ -2,8 +2,6 @@
 
 export(chisq_gof)
 export(ks_gof)
-export(ors_gof)
 export(rms_gof)
-
 importFrom(Rcpp,sourceCpp)
 useDynLib(discretefit)

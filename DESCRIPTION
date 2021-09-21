@@ -17,3 +17,11 @@ LinkingTo:
     Rcpp
 Imports: 
     Rcpp
+Suggests: 
+    knitr,
+    dgof,
+    bench,
+    testthat (>= 3.0.0),
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr

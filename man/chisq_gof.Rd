@@ -4,36 +4,33 @@
 \alias{chisq_gof}
 \title{Simulated p-values for Chi Squared goodness-of-fit}
 \usage{
-chisq_gof(x, y, reps = 10000)
+chisq_gof(x, p, reps = 10000)
 }
 \arguments{
 \item{x}{\itemize{
-\item a numeric vector.
+\item a numeric vector that contains counts for each bin/category.
 }}
 
-\item{y}{\itemize{
-\item a numeric vector representing the reference distribution.
+\item{p}{\itemize{
+\item a numeric vector that contains probabilities for each bin/category. .
 }}
 
 \item{reps}{\itemize{
-\item an integer specifying the number of simulations. The default is set to 10,000
-which is appropriate for exploratory analysis. A higher number of simulations
-should be selected for final analysis.
-
+\item an integer specifying the number of Monte Carlo simulations to perform.
+The default is set to 10,000 which is appropriate for exploratory analysis.
+A higher number of simulations should be selected for final analysis.
 }}
 }
 \value{
 
 }
 \description{
-
 Simulated p-values for Chi Squared goodness-of-fit
-
 }
 \examples{
-x <- c(rep(1, 15), rep(2, 5))
-y <- c(1, 2)
+x <- c(15, 36, 17)
+p <- c(0.25, 0.5, 0.25)
 
-chisq_gof(x, y, reps = 10000)
+chisq_gof(x, p)
 
 }

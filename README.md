@@ -3,16 +3,16 @@
 
 # discretefit
 
-### Simulated goodness-of-fit tests for discrete distributions
-
 <!-- badges: start -->
 <!-- badges: end -->
 
-The discretefit package provides fast Monte Carlo simulations for
-conducting goodness-of-fit tests for discrete distributions. Simulations
-are written in C++. The package is under development but currently
-includes goodness-of-fit tests based on the root-mean-square statistic,
-the Chi-squared statistic, the Kolmogovor-Smirnov statistic.
+discretefit provides fast, Monte Carlo simulations for conducting
+goodness-of-fit tests for discrete distributions. Simulations are
+written in C++.
+
+The package is under development but currently includes goodness-of-fit
+tests based on the root-mean-square statistic, the Chi-squared
+statistic, the Kolmogovor-Smirnov statistic.
 
 ## Installation
 
@@ -36,19 +36,16 @@ library(discretefit)
 x <- c(15, 5, rep(0, 28))
 p <- c(0.25, 0.25, rep(1/(2 * 30 -4), 28))
 
-chisq.test(x, p = p, simulate.p.value = TRUE)
-#> 
-#>  Chi-squared test for given probabilities with simulated p-value (based
-#>  on 2000 replicates)
-#> 
-#> data:  x
-#> X-squared = 30, df = NA, p-value = 0.3698
+set.seed(99)
+chisq_gof(x, p)
+#> [1] 0.3858614
 ```
 
 The root-mean-squared statistic convincingly rejects the hypothesis that
 x is drawn from the distribution defined in p.
 
 ``` r
+set.seed(99)
 rms_gof(x, p)
 #> [1] 9.999e-05
 ```
