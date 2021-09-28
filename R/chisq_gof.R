@@ -8,7 +8,7 @@
 #'     A higher number of simulations should be selected for final analysis.
 
 #'
-#' @return
+#' @return A number representing the p-value.
 #' @export
 #'
 #' @examples
@@ -25,7 +25,7 @@ chisq_gof <- function(x, p, reps = 10000)  {
 
   errors_x_p(x, p)
 
-  out <- chisq_gof_cpp(x, p, reps)
+  out <- simulate_p(2, x, p, reps)
 
   return(out)
 

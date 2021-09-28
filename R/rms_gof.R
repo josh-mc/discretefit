@@ -7,7 +7,7 @@
 #'     which is appropriate for exploratory analysis. A higher number of simulations
 #'     should be selected for final analysis.
 #'
-#' @return
+#' @return A number representing the p-value.
 #' @export
 #'
 #' @examples
@@ -25,7 +25,7 @@ rms_gof <- function(x,
 
   errors_x_p(x, p)
 
-  out <- rms_gof_cpp(x, p, reps)
+  out <- simulate_p(1, x, p, reps)
 
   return(out)
 

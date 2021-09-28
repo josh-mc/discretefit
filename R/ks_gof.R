@@ -8,7 +8,7 @@
 #'     is set to 10,000 which may be appropriate for exploratory analysis. A higher
 #'     number of simulation should be selected for more precise results.
 #'
-#' @return
+#' @return A number representing the p-value.
 #' @export
 #'
 #' @examples
@@ -23,19 +23,9 @@
 
 ks_gof <- function(x, p, reps = 10000)  {
 
-  if(length(x) != length(p)) {
-    stop("The vectors x and p must be the same length.")
-  }
+  errors_x_p(x, p)
 
-  if(sum(p < 0) >= 1) {
-    stop("The vector p cannot contain negative probabilities.")
-  }
-
-  if(sum(p) != 1) {
-    stop("The probilities in vector p must sum to one.")
-  }
-
-  out <- ks_gof_cpp(x, p, reps)
+  out <- simulate_p(3, x, p, reps)
 
   return(out)
 

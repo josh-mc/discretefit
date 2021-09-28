@@ -1,51 +1,15 @@
 #include <Rcpp.h>
+#include "discretefit.h"
 using namespace Rcpp;
-
-NumericVector compute_vec_1_frac2(IntegerVector vector_1,
-                                 IntegerVector uni_2,
-                                 int n_bins,
-                                 NumericVector vec_2_frac)  {
-
-  IntegerVector uni_1 = sort_unique(vector_1);
-  IntegerVector mat_0 = match(uni_2, uni_1);
-  IntegerVector mat_1 = ifelse(is_na(mat_0), 0, mat_0);
-
-  IntegerVector tab_1 = table(vector_1);
-  NumericVector vector_1_bins(n_bins);
-
-  for(int i = 0; i < n_bins; ++i)  {
-
-    if(mat_1(i) > 0) {
-
-      int a = mat_1(i) - 1;
-      vector_1_bins(i) = tab_1(a);
-
-    }
-
-    else {
-
-      vector_1_bins(i) = 0;
-
-    }
-
-  }
-
-  NumericVector vec_1_frac = vector_1_bins / vector_1.size();
-
-  return vec_1_frac;
-
-}
-
 
 double chisq_mod(IntegerVector vector_1,
                    IntegerVector uni_2,
                    int n_bins,
                    NumericVector vec_2_frac)  {
 
-  NumericVector vec_1_frac = compute_vec_1_frac2(vector_1,
+  NumericVector vec_1_frac = compute_vec_1_frac(vector_1,
                                                 uni_2,
-                                                n_bins,
-                                                vec_2_frac);
+                                                n_bins);
 
   NumericVector x = pow((vec_1_frac - vec_2_frac), 2) / vec_2_frac;
 
