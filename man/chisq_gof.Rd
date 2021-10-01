@@ -22,7 +22,7 @@ A higher number of simulations should be selected for final analysis.
 }}
 }
 \value{
-
+A number representing the p-value.
 }
 \description{
 Simulated p-values for Chi Squared goodness-of-fit

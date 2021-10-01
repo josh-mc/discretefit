@@ -23,7 +23,7 @@ number of simulation should be selected for more precise results.
 }}
 }
 \value{
-
+A number representing the p-value.
 }
 \description{
 Simulated p-values for Kolmogorov-Smirnov goodness-of-fit

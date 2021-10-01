@@ -22,7 +22,7 @@ should be selected for final analysis.
 }}
 }
 \value{
-
+A number representing the p-value.
 }
 \description{
 Simulated p-values for root mean squared goodness-of-fit
