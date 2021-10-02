@@ -58,3 +58,25 @@ double ks_stat(NumericVector vec_1_frac,
   return maximum;
 
 }
+
+
+double g2_stat(NumericVector vector_1,
+                  NumericVector vec_1_frac,
+                  NumericVector vec_2_frac)  {
+
+  NumericVector x = vec_1_frac * log(vec_1_frac / vec_2_frac);
+
+  // Taking the sum of x
+  double y = 0;
+
+  for(int i = 0; i < x.size(); i++){
+    y += x[i];
+  }
+
+  double g2 = 2 * vector_1.size() * y;
+
+  return g2;
+
+}
+
+

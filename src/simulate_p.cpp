@@ -42,6 +42,14 @@ double simulate_p(int type,
 
   }
 
+  if(type == 4) {
+
+    statistic += g2_stat(vector_1,
+                         vec_1_frac,
+                         vec_2_frac);
+
+  }
+
 
   int n_bins = vec_2_frac.size();
   IntegerVector uni_2 = seq_len(n_bins);
@@ -77,6 +85,13 @@ double simulate_p(int type,
     if(type == 3)  {
 
       sam_statistic += ks_stat(sam_0_rms,
+                               vec_2_frac);
+    }
+
+    if(type == 4)  {
+
+      sam_statistic += g2_stat(vector_1,
+                               sam_0_rms,
                                vec_2_frac);
     }
 
