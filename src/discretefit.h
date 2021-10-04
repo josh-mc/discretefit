@@ -41,12 +41,22 @@ double ks_stat(NumericVector vec_1_frac,
 #include <Rcpp.h>
 using namespace Rcpp;
 
-double chisq_stat(NumericVector vector_1,
+double chisq_stat(int draws,
            NumericVector vec_1_frac,
            NumericVector vec_2_frac);
 
 #endif
 
 
+#ifndef G2_STAT_H
+#define G2_STAT_H
 
+#include <Rcpp.h>
+using namespace Rcpp;
+
+double g2_stat(int draws,
+                  NumericVector vec_1_frac,
+                  NumericVector vec_2_frac);
+
+#endif
 

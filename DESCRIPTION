@@ -6,7 +6,11 @@ Authors@R:
            family = "McCormick",
            role = c("aut", "cre"),
            email = "joshua.t.mccormick@gmail.com")
-Description: What the package does (one paragraph).
+Description: The package `discretefit` implements fast, Monte Carlo 
+    simulations for goodness-of-fit (GOF) tests for discrete distributions.
+    This includes tests based on the root-mean-square statistic, the 
+    Chi-squared statistic, the log-likelihood-ratio statistic (G^2), and 
+    the Kolmogovov-Smirnov statistic.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -18,6 +22,7 @@ Imports:
 Suggests: 
     knitr,
     dgof,
+    RVAideMemoire,
     bench,
     testthat (>= 3.0.0),
     rmarkdown

@@ -2,31 +2,28 @@
 % Please edit documentation in R/ks_gof.R
 \name{ks_gof}
 \alias{ks_gof}
-\title{Simulated p-values for Kolmogorov-Smirnov goodness-of-fit}
+\title{Simulated Kolmogorov-Smirnov goodness-of-fit test}
 \usage{
 ks_gof(x, p, reps = 10000)
 }
 \arguments{
-\item{x}{\itemize{
-\item a numeric vector that contains counts for each discrete variable.
-}}
+\item{x}{a numeric vector that contains observed counts for each bin/category.}
 
-\item{p}{\itemize{
-\item a vector of probabilities of the same length of x. An error is given
-if any entry of p is negative or if the sum of p does not equal one.
-}}
+\item{p}{a vector of probabilities of the same length of x. An error is given
+if any entry of p is negative or if the sum of p does not equal one.}
 
-\item{reps}{\itemize{
-\item an integer specifying the number of Monte Carlo simulations. The default
+\item{reps}{an integer specifying the number of Monte Carlo simulations. The default
 is set to 10,000 which may be appropriate for exploratory analysis. A higher
-number of simulation should be selected for more precise results.
-}}
+number of simulation should be selected for more precise results.}
 }
 \value{
 A number representing the p-value.
 }
 \description{
-Simulated p-values for Kolmogorov-Smirnov goodness-of-fit
+The \code{ks_gof()} function implements Monte Carlo simulations to calculate p-values
+based on the Kolmogorov-Smirnov statistic for goodness-of-fit tests for discrete
+distributions. The p-value expressed by \code{ks_gof()} is based on a two-sided
+alternative hypothesis.
 }
 \examples{
 x <- c(15, 36, 17)
