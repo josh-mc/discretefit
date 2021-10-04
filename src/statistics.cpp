@@ -19,7 +19,7 @@ double rms_stat(NumericVector vec_1_frac,
   return rms;
 }
 
-double chisq_stat(NumericVector vector_1,
+double chisq_stat(int draws,
                   NumericVector vec_1_frac,
                   NumericVector vec_2_frac)  {
 
@@ -32,7 +32,7 @@ double chisq_stat(NumericVector vector_1,
     y += x[i];
   }
 
-  double chi = y * vector_1.size();
+  double chi = y * draws;
 
   return chi;
 
@@ -60,11 +60,13 @@ double ks_stat(NumericVector vec_1_frac,
 }
 
 
-double g2_stat(NumericVector vector_1,
+double g2_stat(int draws,
                   NumericVector vec_1_frac,
                   NumericVector vec_2_frac)  {
 
-  NumericVector x = vec_1_frac * log(vec_1_frac / vec_2_frac);
+  NumericVector x0 = vec_1_frac * log(vec_1_frac / vec_2_frac);
+
+  NumericVector x = x0[!is_na(x0)];
 
   // Taking the sum of x
   double y = 0;
@@ -73,7 +75,7 @@ double g2_stat(NumericVector vector_1,
     y += x[i];
   }
 
-  double g2 = 2 * vector_1.size() * y;
+  double g2 = 2 * draws * y;
 
   return g2;
 

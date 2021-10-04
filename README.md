@@ -49,13 +49,13 @@ pp <- c(rep(1, 4),
         rep(5, 12))
 
 chisq_gof(x, p)
-#> [1] 0.00229977
+#> [1] 0.00279972
 rms_gof(x, p)
-#> [1] 0.03719628
+#> [1] 0.03989601
 ks_gof(x, p)
-#> [1] 0.2435756
+#> [1] 0.2456754
 g_gof(x, p)
-#> [1] 9.999e-05
+#> [1] 0.00019998
 ```
 
 ## Speed
@@ -82,13 +82,13 @@ bench::system_time(
   chisq_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   250ms   255ms
+#>   344ms   591ms
 
 bench::system_time(
   chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   2.19s   2.25s
+#>   2.89s   3.02s
 ```
 
 The `ks_gof` function in `discretefit` is also faster than the simulated
@@ -109,13 +109,13 @@ bench::system_time(
   ks_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   547ms   546ms
+#>   562ms   559ms
 
 bench::system_time(
   dgof::ks.test(x, ecdf(y), simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   3.89s   3.93s
+#>   3.91s   3.99s
 ```
 
 Additionally, the simulated GOF tests in base R and the `dgof` package
@@ -132,24 +132,24 @@ tests in the Cressie-Read power divergence family. This has been
 demonstrated by Perkins, Tygert, and Ward (2011). They provide the
 following toy example.
 
-Take a discrete distribution with 30 bins (or categories). The
+Take a discrete distribution with 50 bins (or categories). The
 probability for the first and second bin is 0.25. The probability for
-each of the remaining 28 bins is 0.5 / 28 (\~0.0179).
+each of the remaining 48 bins is 0.5 / 48 (\~0.0104).
 
 Now take the observed counts of 15 for the first bin, 5 for the second
-bin, and zero for each of the remaining 28 bins. It’s obvious that these
+bin, and zero for each of the remaining 48 bins. It’s obvious that these
 observations are very unlikely to be a random sample from the above
 distribution. However, the Chi-squared test and G^2 test fail to reject
 the null hypothesis.
 
 ``` r
-x <- c(15, 5, rep(0, 28))
-p <- c(0.25, 0.25, rep(1/(2 * 30 -4), 28))
+x <- c(15, 5, rep(0, 48))
+p <- c(0.25, 0.25, rep(1/(2 * 50 -4), 48))
 
 chisq_gof(x, p)
-#> [1] 0.3960604
+#> [1] 0.9716028
 g_gof(x, p)
-#> [1] 9.999e-05
+#> [1] 0.6643336
 ```
 
 By contrast, the root-mean-square test convincingly rejects the null
@@ -177,6 +177,10 @@ I’m not aware of another R package that implements a root-mean-square
 GOF test.
 
 ## References
+
+Eddelbuettel, Dirk and Romain Francois. “Rcpp: Seamless R and C++
+Integration.” Journal of Statistical Software, 2011.
+<http://www.jstatsoft.org/v40/i08/>
 
 Perkins, William, Mark Tygert, and Rachel Ward. “Computing the
 confidence levels for a root-mean-square test of goodness-of-fit.”

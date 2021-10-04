@@ -2,30 +2,29 @@
 % Please edit documentation in R/g_gof.R
 \name{g_gof}
 \alias{g_gof}
-\title{Simulated p-values for G^2 ("log-likelihood-ratio") goodness-of-fit}
+\title{Simulated log-likelihood-ratio goodness-of-fit test}
 \usage{
 g_gof(x, p, reps = 10000)
 }
 \arguments{
-\item{x}{\itemize{
-\item a numeric vector that contains counts for each bin/category.
-}}
+\item{x}{a numeric vector that contains observed counts for each bin/category.}
 
-\item{p}{\itemize{
-\item a numeric vector that contains probabilities for each bin/category. .
-}}
+\item{p}{a vector of probabilities of the same length of x. An error is given
+if any entry of p is negative or if the sum of p does not equal one.}
 
-\item{reps}{\itemize{
-\item an integer specifying the number of Monte Carlo simulations to perform.
-The default is set to 10,000 which is appropriate for exploratory analysis.
-A higher number of simulations should be selected for final analysis.
-}}
+\item{reps}{an integer specifying the number of Monte Carlo simulations. The default
+is set to 10,000 which may be appropriate for exploratory analysis. A higher
+number of simulation should be selected for more precise results.}
 }
 \value{
 A number representing the p-value.
 }
 \description{
-Simulated p-values for G^2 ("log-likelihood-ratio") goodness-of-fit
+The \code{g_gof()} function implements Monte Carlo simulations to calculate p-values
+based on the log-likelihood-ratio statistic for goodness-of-fit tests for discrete
+distributions. In this context, the log-likelihood-ratio statistic is often referred
+to as the G^2 statistic. Asymptotically, the G^2 GOF test is identical to the Chi-squared
+GOF test, but for smaller n, results may vary significantly.
 }
 \examples{
 x <- c(15, 36, 17)

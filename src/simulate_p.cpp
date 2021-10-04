@@ -30,7 +30,7 @@ double simulate_p(int type,
 
   if(type == 2) {
 
-    statistic += chisq_stat(vector_1,
+    statistic += chisq_stat(draws,
                             vec_1_frac,
                             vec_2_frac);
   }
@@ -44,7 +44,7 @@ double simulate_p(int type,
 
   if(type == 4) {
 
-    statistic += g2_stat(vector_1,
+    statistic += g2_stat(draws,
                          vec_1_frac,
                          vec_2_frac);
 
@@ -77,7 +77,7 @@ double simulate_p(int type,
 
     if(type == 2)  {
 
-      sam_statistic += chisq_stat(vector_1,
+      sam_statistic += chisq_stat(draws,
                                   sam_0_rms,
                                   vec_2_frac);
     }
@@ -90,7 +90,7 @@ double simulate_p(int type,
 
     if(type == 4)  {
 
-      sam_statistic += g2_stat(vector_1,
+      sam_statistic += g2_stat(draws,
                                sam_0_rms,
                                vec_2_frac);
     }

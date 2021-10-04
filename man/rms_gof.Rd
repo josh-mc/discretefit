@@ -2,30 +2,27 @@
 % Please edit documentation in R/rms_gof.R
 \name{rms_gof}
 \alias{rms_gof}
-\title{Simulated p-values for root mean squared goodness-of-fit}
+\title{Simulated root-mean-square goodness-of-fit test}
 \usage{
 rms_gof(x, p, reps = 10000)
 }
 \arguments{
-\item{x}{\itemize{
-\item a numeric vector.
-}}
+\item{x}{a numeric vector that contains observed counts for each bin/category.}
 
-\item{p}{\itemize{
-\item a numeric vector representing the reference distribution.
-}}
+\item{p}{a vector of probabilities of the same length of x. An error is given
+if any entry of p is negative or if the sum of p does not equal one.}
 
-\item{reps}{\itemize{
-\item an integer specifying the number of simulations. The default is set to 10,000
-which is appropriate for exploratory analysis. A higher number of simulations
-should be selected for final analysis.
-}}
+\item{reps}{an integer specifying the number of Monte Carlo simulations. The default
+is set to 10,000 which may be appropriate for exploratory analysis. A higher
+number of simulation should be selected for more precise results.}
 }
 \value{
 A number representing the p-value.
 }
 \description{
-Simulated p-values for root mean squared goodness-of-fit
+The \code{rms_gof()} function implements Monte Carlo simulations to calculate p-values
+based on the root-mean-square statistic for goodness-of-fit tests for discrete
+distributions.
 }
 \examples{
 x <- c(15, 36, 17)

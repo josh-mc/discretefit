@@ -1,12 +1,18 @@
 
-#' Simulated p-values for G^2 ("log-likelihood-ratio") goodness-of-fit
+#' Simulated log-likelihood-ratio goodness-of-fit test
 #'
-#' @param x - a numeric vector that contains counts for each bin/category.
-#' @param p - a numeric vector that contains probabilities for each bin/category. .
-#' @param reps - an integer specifying the number of Monte Carlo simulations to perform.
-#'     The default is set to 10,000 which is appropriate for exploratory analysis.
-#'     A higher number of simulations should be selected for final analysis.
-
+#' The `g_gof()` function implements Monte Carlo simulations to calculate p-values
+#' based on the log-likelihood-ratio statistic for goodness-of-fit tests for discrete
+#' distributions. In this context, the log-likelihood-ratio statistic is often referred
+#' to as the G^2 statistic. Asymptotically, the G^2 GOF test is identical to the Chi-squared
+#' GOF test, but for smaller n, results may vary significantly.
+#'
+#' @param x a numeric vector that contains observed counts for each bin/category.
+#' @param p a vector of probabilities of the same length of x. An error is given
+#'     if any entry of p is negative or if the sum of p does not equal one.
+#' @param reps an integer specifying the number of Monte Carlo simulations. The default
+#'     is set to 10,000 which may be appropriate for exploratory analysis. A higher
+#'     number of simulation should be selected for more precise results.
 #'
 #' @return A number representing the p-value.
 #' @export
