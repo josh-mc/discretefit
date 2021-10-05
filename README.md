@@ -49,13 +49,13 @@ pp <- c(rep(1, 4),
         rep(5, 12))
 
 chisq_gof(x, p)
-#> [1] 0.00279972
+#> [1] 0.00349965
 rms_gof(x, p)
-#> [1] 0.03989601
+#> [1] 0.04189581
 ks_gof(x, p)
-#> [1] 0.2456754
+#> [1] 0.2429757
 g_gof(x, p)
-#> [1] 0.00019998
+#> [1] 9.999e-05
 ```
 
 ## Speed
@@ -82,13 +82,13 @@ bench::system_time(
   chisq_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   344ms   591ms
+#>   219ms   246ms
 
 bench::system_time(
   chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   2.89s   3.02s
+#>   1.91s      2s
 ```
 
 The `ks_gof` function in `discretefit` is also faster than the simulated
@@ -109,13 +109,13 @@ bench::system_time(
   ks_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   562ms   559ms
+#>   516ms   530ms
 
 bench::system_time(
   dgof::ks.test(x, ecdf(y), simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   3.91s   3.99s
+#>   4.66s   5.41s
 ```
 
 Additionally, the simulated GOF tests in base R and the `dgof` package
@@ -180,7 +180,7 @@ GOF test.
 
 Eddelbuettel, Dirk and Romain Francois. “Rcpp: Seamless R and C++
 Integration.” Journal of Statistical Software, 2011.
-<http://www.jstatsoft.org/v40/i08/>
+<https://www.jstatsoft.org/article/view/v040i08>
 
 Perkins, William, Mark Tygert, and Rachel Ward. “Computing the
 confidence levels for a root-mean-square test of goodness-of-fit.”
