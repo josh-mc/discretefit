@@ -2,7 +2,7 @@
 % Please edit documentation in R/g_gof.R
 \name{g_gof}
 \alias{g_gof}
-\title{Simulated log-likelihood-ratio goodness-of-fit test}
+\title{Simulated log-likelihood-ratio (\eqn{G^2}) goodness-of-fit test}
 \usage{
 g_gof(x, p, reps = 10000)
 }
@@ -25,6 +25,12 @@ based on the log-likelihood-ratio statistic for goodness-of-fit tests for discre
 distributions. In this context, the log-likelihood-ratio statistic is often referred
 to as the G^2 statistic. Asymptotically, the G^2 GOF test is identical to the Chi-squared
 GOF test, but for smaller n, results may vary significantly.
+}
+\details{
+d
+\deqn{p(x) = \frac{\lambda^x e^{-\lambda}}{x!}}{%
+  p(x) = \lambda^x exp(-\lambda)/x!}
+for \eqn{x = 0, 1, 2, \ldots}.
 }
 \examples{
 x <- c(15, 36, 17)
