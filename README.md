@@ -9,22 +9,12 @@
 The package `discretefit` implements fast, Monte Carlo simulations for
 goodness-of-fit (GOF) tests for discrete distributions. This includes
 tests based on the root-mean-square statistic, the Chi-squared
-statistic, the log-likelihood-ratio statistic (G^2), and the
+statistic, the log-likelihood-ratio (*G*<sup>2</sup>) statistic, and the
 Kolmogovov-Smirnov statistic.
 
 Simulations are written in C++ (utilizing `Rcpp`) and are much faster
 than the simulated Chi-squared GOF test in the R `stats` package and the
 simulated Kolmogorov-Smirnov GOF test in the `dgof` package.
-
-## Installation
-
-You can install the development version from
-[GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("josh-mc/discretefit")
-```
 
 ## Usage
 
@@ -49,20 +39,20 @@ pp <- c(rep(1, 4),
         rep(5, 12))
 
 chisq_gof(x, p)
-#> [1] 0.00349965
+#> [1] 0.0029997
 rms_gof(x, p)
-#> [1] 0.04189581
-ks_gof(x, p)
-#> [1] 0.2429757
+#> [1] 0.03759624
 g_gof(x, p)
 #> [1] 9.999e-05
+ks_gof(x, p)
+#> [1] 0.2408759
 ```
 
 ## Speed
 
 The simulated Chi-squared GOF test in `discretefit` produces identical
-answers to the simulated Chi-squared GOF test in the stats package that
-is part of base R.
+answers to the simulated Chi-squared GOF test in the `stats` package
+that is part of base R.
 
 ``` r
 set.seed(499)
@@ -73,22 +63,22 @@ chisq.test(x, p = p, simulate.p.value = TRUE)$p.value
 #> [1] 0.002998501
 ```
 
-However, because the Monte Carlo simulations in `discretefit` are
-written in C++, chisq\_gof is much faster than `chisq.test`, especially
-when a large number of simulations are required.
+However, because Monte Carlo simulations in `discretefit` are
+implemented in C++, `chisq_gof` is much faster than `chisq.test`,
+especially when a large number of simulations are required.
 
 ``` r
 bench::system_time(
   chisq_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   219ms   246ms
+#>   234ms   236ms
 
 bench::system_time(
   chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   1.91s      2s
+#>   1.91s   1.99s
 ```
 
 The `ks_gof` function in `discretefit` is also faster than the simulated
@@ -109,13 +99,13 @@ bench::system_time(
   ks_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   516ms   530ms
+#>   688ms   684ms
 
 bench::system_time(
   dgof::ks.test(x, ecdf(y), simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   4.66s   5.41s
+#>   5.45s   5.61s
 ```
 
 Additionally, the simulated GOF tests in base R and the `dgof` package
@@ -138,9 +128,9 @@ each of the remaining 48 bins is 0.5 / 48 (\~0.0104).
 
 Now take the observed counts of 15 for the first bin, 5 for the second
 bin, and zero for each of the remaining 48 bins. It’s obvious that these
-observations are very unlikely to be a random sample from the above
-distribution. However, the Chi-squared test and G^2 test fail to reject
-the null hypothesis.
+observations are very unlikely to occur for random sample from the above
+distribution. However, the Chi-squared test and *G*<sup>2</sup> test
+fail to reject the null hypothesis.
 
 ``` r
 x <- c(15, 5, rep(0, 48))
@@ -169,14 +159,19 @@ As noted above, the `stats` package in base R implements a simulated
 Chi-squared GOF test, and the `dgof` package implements simulated
 Kolmogorov-Smirnov GOF test.
 
-I’m not aware of an R package that implements a simulated G^2 GOF test
-but the packages `RVAideMemoire` and `DescTools` implement GOF tests
-that utilize approximations based on the Chi-squared distribution.
+I’m not aware of an R package that implements a simulated
+*G*<sup>2</sup> GOF test but the packages `RVAideMemoire` and
+`DescTools` implement GOF tests that utilize approximations based on the
+Chi-squared distribution.
 
 I’m not aware of another R package that implements a root-mean-square
 GOF test.
 
 ## References
+
+Dwass, Meyer. “Modified randomization tests for nonparametric
+hypotheses.” Annuls of Mathematical Statistics, 1957.
+<https://doi.org/10.1214/aoms/1177707045>
 
 Eddelbuettel, Dirk and Romain Francois. “Rcpp: Seamless R and C++
 Integration.” Journal of Statistical Software, 2011.
@@ -186,6 +181,11 @@ Perkins, William, Mark Tygert, and Rachel Ward. “Computing the
 confidence levels for a root-mean-square test of goodness-of-fit.”
 Applied Mathematics and Computation, 2011.
 <https://doi.org/10.1016/j.amc.2011.03.124>
+
+Phipson, Belinda, and Gordon K. Smyth. “Permutation p-values should
+never be zero: calculating exact p-values when permutations are randomly
+drawn.” Statistical Applications in Genetics and Molecular Biology,
+2010. <https://dx.doi.org/10.2202/1544-6115.1585>
 
 Ward, Rachel and Raymond J. Carroll. “Testing Hardy–Weinberg equilibrium
 with a simple root-mean-square statistic.” Biostatistics, 2014.

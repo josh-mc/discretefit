@@ -2,7 +2,7 @@
 % Please edit documentation in R/g_gof.R
 \name{g_gof}
 \alias{g_gof}
-\title{Simulated log-likelihood-ratio goodness-of-fit test}
+\title{Simulated log-likelihood-ratio (G^2) goodness-of-fit test}
 \usage{
 g_gof(x, p, reps = 10000)
 }

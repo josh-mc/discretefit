@@ -14,6 +14,21 @@ test_that("chisq_gof equal to chisq.test", {
 
 })
 
+test_that("chisq_gof equal to chisq.test", {
+
+  x <- c(134, 128)
+  p <- c(0.6, 0.4)
+
+  set.seed(40)
+  a <- chisq_gof(x, p)
+
+  set.seed(40)
+  b <- chisq.test(x, p = p, simulate.p.value = TRUE, B = 10000)$p.value
+
+  expect_equal(a, b)
+
+})
+
 
 test_that("chisq_gof equal to rms_gof for uniform distribution", {
 
