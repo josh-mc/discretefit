@@ -1,5 +1,5 @@
 
-#' Simulated log-likelihood-ratio goodness-of-fit test
+#' Simulated log-likelihood-ratio (G^2) goodness-of-fit test
 #'
 #' The `g_gof()` function implements Monte Carlo simulations to calculate p-values
 #' based on the log-likelihood-ratio statistic for goodness-of-fit tests for discrete
