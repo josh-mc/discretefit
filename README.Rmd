@@ -16,11 +16,28 @@ knitr::opts_chunk$set(
 # discretefit
 
 <!-- badges: start -->
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/discretefit)](https://cran.r-project.org/package=discretefit) [![CRAN_latest_release_date](https://www.r-pkg.org/badges/last-release/discretefit)](https://cran.r-project.org/package=discretefit) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
+
 <!-- badges: end -->
 
 The package `discretefit` implements fast, Monte Carlo simulations for goodness-of-fit (GOF) tests for discrete distributions. This includes tests based on the root-mean-square statistic, the Chi-squared statistic, the log-likelihood-ratio ($G^2$) statistic, and the Kolmogovov-Smirnov statistic.
 
 Simulations are written in C++ (utilizing `Rcpp`) and are much faster than the simulated Chi-squared GOF test in the R `stats` package and the simulated Kolmogorov-Smirnov GOF test in the `dgof` package. 
+
+## Installation
+
+You can install `discretefit` from CRAN.
+
+```{r eval = FALSE}
+install.packages("discretefit")
+```
+
+You can also install the development version from GitHub:
+
+```{r eval = FALSE}
+devtools::install_github("josh-mc/discretefit")
+```
 
 ## Usage
 

@@ -4,6 +4,11 @@
 # discretefit
 
 <!-- badges: start -->
+
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/discretefit)](https://cran.r-project.org/package=discretefit)
+[![CRAN\_latest\_release\_date](https://www.r-pkg.org/badges/last-release/discretefit)](https://cran.r-project.org/package=discretefit)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
+
 <!-- badges: end -->
 
 The package `discretefit` implements fast, Monte Carlo simulations for
@@ -15,6 +20,20 @@ Kolmogovov-Smirnov statistic.
 Simulations are written in C++ (utilizing `Rcpp`) and are much faster
 than the simulated Chi-squared GOF test in the R `stats` package and the
 simulated Kolmogorov-Smirnov GOF test in the `dgof` package.
+
+## Installation
+
+You can install `discretefit` from CRAN.
+
+``` r
+install.packages("discretefit")
+```
+
+You can also install the development version from GitHub:
+
+``` r
+devtools::install_github("josh-mc/discretefit")
+```
 
 ## Usage
 
@@ -39,13 +58,13 @@ pp <- c(rep(1, 4),
         rep(5, 12))
 
 chisq_gof(x, p)
-#> [1] 0.0029997
+#> [1] 0.00289971
 rms_gof(x, p)
-#> [1] 0.03759624
+#> [1] 0.03979602
 g_gof(x, p)
 #> [1] 9.999e-05
 ks_gof(x, p)
-#> [1] 0.2408759
+#> [1] 0.2365763
 ```
 
 ## Speed
@@ -72,13 +91,13 @@ bench::system_time(
   chisq_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   234ms   236ms
+#>   359ms   489ms
 
 bench::system_time(
   chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   1.91s   1.99s
+#>   2.58s   3.65s
 ```
 
 The `ks_gof` function in `discretefit` is also faster than the simulated
@@ -99,13 +118,13 @@ bench::system_time(
   ks_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   688ms   684ms
+#>   703ms   991ms
 
 bench::system_time(
   dgof::ks.test(x, ecdf(y), simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   5.45s   5.61s
+#>   5.84s   7.18s
 ```
 
 Additionally, the simulated GOF tests in base R and the `dgof` package
