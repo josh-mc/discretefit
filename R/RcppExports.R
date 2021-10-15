@@ -25,7 +25,7 @@ rms_gof_cpp <- function(vector_1, vec_2_frac, reps) {
     .Call('_discretefit_rms_gof_cpp', PACKAGE = 'discretefit', vector_1, vec_2_frac, reps)
 }
 
-simulate_p <- function(type, vector_1, vec_2_frac, reps) {
-    .Call('_discretefit_simulate_p', PACKAGE = 'discretefit', type, vector_1, vec_2_frac, reps)
+simulate_p <- function(type, vector_1, vec_2_frac, reps, tolerance) {
+    .Call('_discretefit_simulate_p', PACKAGE = 'discretefit', type, vector_1, vec_2_frac, reps, tolerance)
 }
 

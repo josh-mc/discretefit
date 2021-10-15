@@ -7,9 +7,11 @@ using namespace Rcpp;
 double simulate_p(int type,
                   NumericVector vector_1,
                   NumericVector vec_2_frac,
-                  double reps)  {
+                  double reps,
+                  double tolerance)  {
 
-  //Here we take the rms statistic.
+
+  //Here we calculate draws and vec_1_frac.
 
   int draws = 0;
 
@@ -19,36 +21,55 @@ double simulate_p(int type,
 
   NumericVector vec_1_frac = vector_1 / draws;
 
-  double statistic = 0;
+  //Define which statistic to use.
 
-  if(type == 1) {
+  auto stat_fun = [&](int type,
+                        NumericVector vec_1_frac,
+                        NumericVector vec_2_frac,
+                        int draws)  {
 
-    statistic += rms_stat(vec_1_frac,
-                          vec_2_frac);
+    if(type == 1) {
 
-  }
+      return rms_stat(vec_1_frac,
+                      vec_2_frac);
 
-  if(type == 2) {
+    }
 
-    statistic += chisq_stat(draws,
-                            vec_1_frac,
-                            vec_2_frac);
-  }
+    if(type == 2) {
 
-  if(type == 3) {
+    return chisq_stat(draws,
+                      vec_1_frac,
+                      vec_2_frac);
+    }
 
-    statistic += ks_stat(vec_1_frac,
-                         vec_2_frac);
+    if(type == 3) {
 
-  }
+    return ks_stat(vec_1_frac,
+                   vec_2_frac);
 
-  if(type == 4) {
+    }
 
-    statistic += g2_stat(draws,
-                         vec_1_frac,
-                         vec_2_frac);
+    if(type == 4) {
 
-  }
+    return g2_stat(draws,
+                   vec_1_frac,
+                   vec_2_frac);
+
+    }
+
+    if(type == 5) {
+
+      return ft_stat(draws,
+                     vec_1_frac,
+                     vec_2_frac);
+
+    }
+  };
+
+  double statistic = stat_fun(type,
+                              vec_1_frac,
+                              vec_2_frac,
+                              draws);
 
 
   int n_bins = vec_2_frac.size();
@@ -63,39 +84,16 @@ double simulate_p(int type,
     }
 
     IntegerVector sam_0 = sample(n_bins, draws, true, vec_2_frac);
-    NumericVector sam_0_rms = compute_vec_1_frac(sam_0,
+    NumericVector sam_0_frac = compute_vec_1_frac(sam_0,
                                                  uni_2,
                                                  n_bins);
 
-    double sam_statistic = 0;
+    double sam_statistic = stat_fun(type,
+                                    sam_0_frac,
+                                    vec_2_frac,
+                                    draws);
 
-    if(type == 1)  {
-
-      sam_statistic += rms_stat(sam_0_rms,
-                                vec_2_frac);
-    }
-
-    if(type == 2)  {
-
-      sam_statistic += chisq_stat(draws,
-                                  sam_0_rms,
-                                  vec_2_frac);
-    }
-
-    if(type == 3)  {
-
-      sam_statistic += ks_stat(sam_0_rms,
-                               vec_2_frac);
-    }
-
-    if(type == 4)  {
-
-      sam_statistic += g2_stat(draws,
-                               sam_0_rms,
-                               vec_2_frac);
-    }
-
-    if (sam_statistic >= 0.999999999999986 * statistic)  {
+    if (sam_statistic >= tolerance * statistic)  {
       total_actual += 1;
     }
 

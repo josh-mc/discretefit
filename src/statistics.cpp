@@ -81,4 +81,21 @@ double g2_stat(int draws,
 
 }
 
+double ft_stat(int draws,
+               NumericVector vec_1_frac,
+               NumericVector vec_2_frac)  {
 
+  NumericVector x = pow(sqrt(vec_1_frac) - sqrt(vec_2_frac), 2);
+
+  // Taking the sum of x
+  double y = 0;
+
+  for(int i = 0; i < x.size(); i++){
+    y += x[i];
+  }
+
+  double ft = 4 * draws * y;
+
+  return ft;
+
+}

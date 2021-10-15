@@ -13,6 +13,7 @@
 #' @param reps an integer specifying the number of Monte Carlo simulations. The default
 #'     is set to 10,000 which may be appropriate for exploratory analysis. A higher
 #'     number of simulation should be selected for more precise results.
+#'@param tolerance sets an upper bound for rounding errors when evaluation equality.
 #'
 #' @return A number representing the p-value.
 #' @export
@@ -27,11 +28,11 @@
 #' @useDynLib discretefit
 
 
-g_gof <- function(x, p, reps = 10000)  {
+g_gof <- function(x, p, reps = 10000, tolerance = 1 - 64 * .Machine$double.eps)  {
 
   errors_x_p(x, p)
 
-  out <- simulate_p(4, x, p, reps)
+  out <- simulate_p(4, x, p, reps, tolerance)
 
   return(out)
 
