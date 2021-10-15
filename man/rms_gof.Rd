@@ -14,8 +14,9 @@ if any entry of p is negative or if the sum of p does not equal one.}
 
 \item{reps}{an integer specifying the number of Monte Carlo simulations. The default
 is set to 10,000 which may be appropriate for exploratory analysis. A higher
-number of simulation should be selected for more precise results.
-@param tolerance sets an upper bound for rounding errors when evaluation equality.}
+number of simulation should be selected for more precise results.}
+
+\item{tolerance}{sets an upper bound for rounding errors when evaluation equality.}
 }
 \value{
 A number representing the p-value.
