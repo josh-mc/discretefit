@@ -2,6 +2,8 @@
 #include "discretefit.h"
 using namespace Rcpp;
 
+// [[Rcpp::export]]
+
 double ks_mod_p(IntegerVector vector_1,
                 IntegerVector uni_2,
                 int n_bins,
@@ -88,3 +90,74 @@ double ks_gof_cpp(NumericVector vector_1,
   return p_value;
 
 }
+
+// [[Rcpp::export]]
+
+double ks_stat(NumericVector vector_1,
+                  NumericVector vec_2_frac,
+                  double reps)  {
+
+  //This first part is just to convert vector_1 into fractions.
+
+  int draws = 0;
+
+  for(int i = 0; i < vector_1.size(); i++)  {
+    draws += vector_1(i);
+  }
+
+  NumericVector vec_1_frac = vector_1 / draws;
+
+  //Now that we have fractions we can calculate the ks stat.
+
+  NumericVector vec_1_cumsum = cumsum(vec_1_frac);
+  NumericVector vec_2_cumsum = cumsum(vec_2_frac);
+  NumericVector diff = vec_1_cumsum - vec_2_cumsum;
+
+  NumericVector absolute(diff.size());
+
+  for(int i = 0; i < diff.size(); ++i)  {
+
+    absolute(i) = std::abs(diff(i));
+
+  }
+
+  double ks_stat = max(absolute);
+
+  return ks_stat;
+}
+
+// [[Rcpp::export]]
+
+DataFrame ks_stat_df(NumericVector vector_1,
+               NumericVector vec_2_frac,
+               double reps)  {
+
+  //This first part is just to convert vector_1 into fractions.
+
+  int draws = 0;
+
+  for(int i = 0; i < vector_1.size(); i++)  {
+    draws += vector_1(i);
+  }
+
+  NumericVector vec_1_frac = vector_1 / draws;
+
+  //Now that we have fractions we can calculate the ks stat.
+
+  NumericVector vec_1_cumsum = cumsum(vec_1_frac);
+  NumericVector vec_2_cumsum = cumsum(vec_2_frac);
+  NumericVector diff = vec_1_cumsum - vec_2_cumsum;
+
+  NumericVector absolute(diff.size());
+
+  DataFrame df = DataFrame::create(Named("vec_1_frac") = vec_1_frac,
+                                   Named("vec_2_frac") = vec_2_frac,
+                                   Named("vec_1_cumsum") = vec_1_cumsum,
+                                   Named("vec_2_cumsum") = vec_2_cumsum,
+                                   Named("diff") = diff,
+                                   Named("absolute") = absolute);
+
+  return df;
+}
+
+
