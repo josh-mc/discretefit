@@ -35,21 +35,21 @@ double simulate_p(int type,
 
     }
 
-    if(type == 2) {
+    else if(type == 2) {
 
     return chisq_stat(draws,
                       vec_1_frac,
                       vec_2_frac);
     }
 
-    if(type == 3) {
+    else if(type == 3) {
 
     return ks_stat(vec_1_frac,
                    vec_2_frac);
 
     }
 
-    if(type == 4) {
+    else if(type == 4) {
 
     return g2_stat(draws,
                    vec_1_frac,
@@ -57,7 +57,7 @@ double simulate_p(int type,
 
     }
 
-    if(type == 5) {
+    else {
 
       return ft_stat(draws,
                      vec_1_frac,

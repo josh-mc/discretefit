@@ -53,10 +53,10 @@ test_that("ks_gof ~equal to ks.test (from dgof package)", {
   p <- c(0.2, 0.2, 0.2, 0.4)
 
   set.seed(284)
-  a <- ks_gof(x, p)
+  a <- ks_gof(x, p, reps = 2000)
 
   set.seed(284)
-  b <- dgof::ks.test(x, ecdf(y), simulate.p.value = TRUE, B = 10000)$p.value
+  b <- dgof::ks.test(x, ecdf(y), simulate.p.value = TRUE, B = 2000)$p.value
 
   expect_equal(tolerance = 0.001, a, b)
 
@@ -91,3 +91,20 @@ test_that("g_gof is ~equal to G.test (from RVAideMemoire package)", {
   expect_equal(tolerance = 0.001, a, b)
 
 })
+
+test_that("ft_gof is asymtoptically equal to chisq_gof", {
+
+  x <- c(2114, 2128, 2112)
+  p <- c(rep(1/3, 3))
+
+  set.seed(300)
+  a <- chisq_gof(x, p)
+
+  set.seed(300)
+  b <- ft_gof(x, p)
+
+  expect_equal(a, b)
+
+})
+
+
