@@ -72,3 +72,16 @@ double ft_stat(int draws,
                NumericVector vec_2_frac);
 
 #endif
+
+#ifndef CVM_STAT_H
+#define CVM_STAT_H
+
+#include <Rcpp.h>
+using namespace Rcpp;
+
+double cvm_stat(int draws,
+               NumericVector vec_1_frac,
+               NumericVector vec_2_frac);
+
+#endif
+

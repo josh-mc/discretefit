@@ -99,3 +99,17 @@ double ft_stat(int draws,
   return ft;
 
 }
+
+
+double cvm_stat(int draws,
+                NumericVector vec_1_frac,
+                NumericVector vec_2_frac)  {
+
+  NumericVector vec_1_cumsum = cumsum(vec_1_frac);
+  NumericVector vec_2_cumsum = cumsum(vec_2_frac);
+  NumericVector x = pow(vec_1_cumsum - vec_2_cumsum, 2) * vec_2_frac;
+
+  double cvm = sum(x) * draws;
+
+  return cvm;
+}

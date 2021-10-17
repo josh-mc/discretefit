@@ -4,7 +4,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 
-double simulate_p(int type,
+List simulate_p(int type,
                   NumericVector vector_1,
                   NumericVector vec_2_frac,
                   double reps,
@@ -57,13 +57,22 @@ double simulate_p(int type,
 
     }
 
-    else {
+    else if(type == 5) {
 
       return ft_stat(draws,
                      vec_1_frac,
                      vec_2_frac);
 
     }
+
+    else {
+
+      return cvm_stat(draws,
+                     vec_1_frac,
+                     vec_2_frac);
+
+    }
+
   };
 
   double statistic = stat_fun(type,
@@ -101,6 +110,9 @@ double simulate_p(int type,
 
   double p_value = (total_actual + 1) / (reps + 1);
 
-  return p_value;
+  List L = List::create(Named("statistic") = statistic,
+                        Named("p_value") = p_value);
+
+  return L;
 
 }

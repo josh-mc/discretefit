@@ -85,7 +85,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // simulate_p
-double simulate_p(int type, NumericVector vector_1, NumericVector vec_2_frac, double reps, double tolerance);
+List simulate_p(int type, NumericVector vector_1, NumericVector vec_2_frac, double reps, double tolerance);
 RcppExport SEXP _discretefit_simulate_p(SEXP typeSEXP, SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
