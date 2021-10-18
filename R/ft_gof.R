@@ -12,7 +12,11 @@
 #' @param reps an integer specifying the number of Monte Carlo simulations. The default
 #'     is set to 10,000 which may be appropriate for exploratory analysis. A higher
 #'     number of simulation should be selected for more precise results.
-#'@param tolerance sets an upper bound for rounding errors when evaluation equality.
+#'@param tolerance sets an upper bound for rounding errors when evaluating
+#'    whether a statistic for a simulation is greater than or equal to the
+#'    statistic for the observed data. The default is identical to the tolerance
+#'    set for simulations in the `chisq.test` function from the `stats`
+#'    package in base R.
 #'
 #'@return A list with class "htest" containing the following components:
 #'
