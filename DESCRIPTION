@@ -23,6 +23,7 @@ Suggests:
     knitr,
     dgof,
     RVAideMemoire,
+    cvmdisc,
     bench,
     testthat (>= 3.0.0),
     rmarkdown

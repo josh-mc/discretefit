@@ -19,7 +19,12 @@ number of simulation should be selected for more precise results.}
 \item{tolerance}{sets an upper bound for rounding errors when evaluation equality.}
 }
 \value{
-A number representing the p-value.
+A list with class "htest" containing the following components:
+
+\item{statistic}{the value of the Kolmogorov-Smirnov test statistic}
+\item{p.value}{the simulated p-value for the test}
+\item{method}{a character string describing the test}
+\item{data.name}{a character string give the name of the data}
 }
 \description{
 The \code{ks_gof()} function implements Monte Carlo simulations to calculate p-values

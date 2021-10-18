@@ -15,7 +15,13 @@
 #'     number of simulation should be selected for more precise results.
 #'@param tolerance sets an upper bound for rounding errors when evaluation equality.
 #'
-#' @return A number representing the p-value.
+#'@return A list with class "htest" containing the following components:
+#'
+#' \item{statistic}{the value of the log-likelihood-ratio test statistic (G2)}
+#' \item{p.value}{the simulated p-value for the test}
+#' \item{method}{a character string describing the test}
+#' \item{data.name}{a character string give the name of the data}
+#'
 #' @export
 #'
 #' @examples
@@ -28,12 +34,23 @@
 #' @useDynLib discretefit
 
 
-g_gof <- function(x, p, reps = 10000, tolerance = 1 - 64 * .Machine$double.eps)  {
+g_gof <- function(x, p, reps = 10000, tolerance = 64 * .Machine$double.eps)  {
 
   errors_x_p(x, p)
 
   out <- simulate_p(4, x, p, reps, tolerance)
 
-  return(out)
+  names(out$statistic) <- "G2"
+
+  val <- list(p.value = out$p_value,
+              statistic = out$statistic,
+              method = "Simulated log-likelihood-ratio goodness-of-fit test",
+              data.name = deparse(substitute(x)),
+              class = "htest")
+
+  class(val) <- "htest"
+
+  return(val)
 
 }
+

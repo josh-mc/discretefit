@@ -1,7 +1,7 @@
 #' Simulated Cramer-von Mises goodness-of-fit test
 #'
 #' The `cvm_gof()` function implements Monte Carlo simulations to calculate p-values
-#' based on the Cramer-von Mises statistic for goodness-of-fit tests for discrete
+#' based on the Cramer-von Mises statistic (W^2) for goodness-of-fit tests for discrete
 #' distributions.
 #'
 #' @param x a numeric vector that contains observed counts for each bin/category.
@@ -12,7 +12,13 @@
 #'     number of simulation should be selected for more precise results.
 #'@param tolerance sets an upper bound for rounding errors when evaluating equality.
 #'
-#' @return A number representing the p-value.
+#' @return A list with class "htest" containing the following components:
+#'
+#' \item{statistic}{the value of the Cramer-von Mises test statistic (W2)}
+#' \item{p.value}{the simulated p-value for the test}
+#' \item{method}{a character string describing the test}
+#' \item{data.name}{a character string give the name of the data}
+#'
 #' @export
 #'
 #' @examples
@@ -25,12 +31,23 @@
 #' @useDynLib discretefit
 
 
-cvm_gof <- function(x, p, reps = 10000, tolerance = 1 - 64 * .Machine$double.eps)  {
+cvm_gof <- function(x, p, reps = 10000, tolerance = 64 * .Machine$double.eps)  {
 
   errors_x_p(x, p)
 
   out <- simulate_p(6, x, p, reps, tolerance)
 
-  return(out)
+  names(out$statistic) <- "W2"
+
+  val <- list(p.value = out$p_value,
+              statistic = out$statistic,
+              method = "Simulated Cramer-von Mises goodness-of-fit test",
+              data.name = deparse(substitute(x)),
+              class = "htest")
+
+  class(val) <- "htest"
+
+  return(val)
 
 }
+

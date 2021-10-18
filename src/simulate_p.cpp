@@ -102,7 +102,7 @@ List simulate_p(int type,
                                     vec_2_frac,
                                     draws);
 
-    if (sam_statistic >= tolerance * statistic)  {
+    if (sam_statistic >= (1 - tolerance) * statistic)  {
       total_actual += 1;
     }
 
