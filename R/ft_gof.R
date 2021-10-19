@@ -41,7 +41,7 @@ ft_gof <- function(x, p, reps = 10000, tolerance = 64 * .Machine$double.eps)  {
 
   errors_x_p(x, p)
 
-  out <- simulate_p(4, x, p, reps, tolerance)
+  out <- simulate_p(5, x, p, reps, tolerance)
 
   names(out$statistic) <- "FT"
 
