@@ -1,12 +1,12 @@
 Package: discretefit
 Title: Simulated Goodness-of-Fit Tests for Discrete Distributions
-Version: 0.0.0.9001
+Version: 0.1.0
 Authors@R: 
     person(given = "Josh",
            family = "McCormick",
            role = c("aut", "cre"),
            email = "josh.mccormick@aya.yale.edu")
-Description: Implements fast, Monte Carlo simulations for 
+Description: Implements Monte Carlo simulations for 
     goodness-of-fit (GOF) tests for discrete distributions. This 
     includes tests based on the root-mean-square statistic, the 
     Chi-squared statistic, the log-likelihood-ratio (G^2) statistic,
