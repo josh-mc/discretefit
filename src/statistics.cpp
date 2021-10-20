@@ -2,19 +2,18 @@
 #include "discretefit.h"
 using namespace Rcpp;
 
-double rms_stat(NumericVector vec_1_frac,
+double rms_stat(int draws,
+                NumericVector vec_1_frac,
                 NumericVector vec_2_frac)  {
 
-  NumericVector x = pow((vec_1_frac - vec_2_frac), 2);
+  NumericVector x = pow((sqrt(draws) * (vec_1_frac - vec_2_frac)), 2);
 
   // Taking the sum of x
-  double y = 0;
+  double rms = 0;
 
   for(int i = 0; i < x.size(); i++){
-    y += x[i];
+    rms += x[i];
   }
-
-  double rms = sqrt(y / vec_2_frac.size());
 
   return rms;
 }

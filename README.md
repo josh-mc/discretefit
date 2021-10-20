@@ -56,19 +56,19 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 17.082, p-value = 0.0023
+#> Chi-squared = 17.082, p-value = 0.0034
 rms_gof(x, p)
 #> 
 #>  Simulated root-mean-square goodness-of-fit test
 #> 
 #> data:  x
-#> RMS = 0.045667, p-value = 0.0401
+#> RMS = 1.731, p-value = 0.0418
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 27.362, p-value = 9.999e-05
+#> G2 = 27.362, p-value = 2e-04
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
@@ -80,13 +80,13 @@ ks_gof(x, p)
 #>  Simulated Kolmogorov-Smirnov goodness-of-fit test
 #> 
 #> data:  x
-#> KS = 0.056627, p-value = 0.238
+#> KS = 0.056627, p-value = 0.2416
 cvm_gof(x, p)
 #> 
 #>  Simulated Cramer-von Mises goodness-of-fit test
 #> 
 #> data:  x
-#> W2 = 0.12578, p-value = 0.1836
+#> W2 = 0.12578, p-value = 0.188
 ```
 
 ## Root-mean-square statistic
@@ -116,19 +116,19 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 30, p-value = 0.9723
+#> Chi-squared = 30, p-value = 0.9701
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 32.958, p-value = 0.6664
+#> G2 = 32.958, p-value = 0.6617
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
 #> 
 #> data:  x
-#> FT = 50.718, p-value = 0.1387
+#> FT = 50.718, p-value = 0.1415
 ```
 
 By contrast, the root-mean-square test convincingly rejects the null
@@ -140,11 +140,11 @@ rms_gof(x, p)
 #>  Simulated root-mean-square goodness-of-fit test
 #> 
 #> data:  x
-#> RMS = 0.071443, p-value = 9.999e-05
+#> RMS = 5.1042, p-value = 9.999e-05
 ```
 
-For additional examples, also see Perkins, Tygert, and Ward (2011) and
-Ward and Carroll (2014).
+For additional examples, see Perkins, Tygert, and Ward (2011) and Ward
+and Carroll (2014).
 
 ## Speed
 
@@ -170,13 +170,13 @@ bench::system_time(
   chisq_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   250ms   256ms
+#>   281ms   303ms
 
 bench::system_time(
   chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   1.81s   1.86s
+#>   1.97s   2.11s
 ```
 
 Additionally, the simulated GOF tests in base R is vectorized, so for
