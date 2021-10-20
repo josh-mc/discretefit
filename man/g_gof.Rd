@@ -4,7 +4,7 @@
 \alias{g_gof}
 \title{Simulated log-likelihood-ratio (G^2) goodness-of-fit test}
 \usage{
-g_gof(x, p, reps = 10000)
+g_gof(x, p, reps = 10000, tolerance = 64 * .Machine$double.eps)
 }
 \arguments{
 \item{x}{a numeric vector that contains observed counts for each bin/category.}
@@ -15,9 +15,20 @@ if any entry of p is negative or if the sum of p does not equal one.}
 \item{reps}{an integer specifying the number of Monte Carlo simulations. The default
 is set to 10,000 which may be appropriate for exploratory analysis. A higher
 number of simulation should be selected for more precise results.}
+
+\item{tolerance}{sets an upper bound for rounding errors when evaluating
+whether a statistic for a simulation is greater than or equal to the
+statistic for the observed data. The default is identical to the tolerance
+set for simulations in the \code{chisq.test} function from the \code{stats}
+package in base R.}
 }
 \value{
-A number representing the p-value.
+A list with class "htest" containing the following components:
+
+\item{statistic}{the value of the log-likelihood-ratio test statistic (G2)}
+\item{p.value}{the simulated p-value for the test}
+\item{method}{a character string describing the test}
+\item{data.name}{a character string give the name of the data}
 }
 \description{
 The \code{g_gof()} function implements Monte Carlo simulations to calculate p-values
@@ -25,12 +36,6 @@ based on the log-likelihood-ratio statistic for goodness-of-fit tests for discre
 distributions. In this context, the log-likelihood-ratio statistic is often referred
 to as the G^2 statistic. Asymptotically, the G^2 GOF test is identical to the Chi-squared
 GOF test, but for smaller n, results may vary significantly.
-}
-\details{
-d
-\deqn{p(x) = \frac{\lambda^x e^{-\lambda}}{x!}}{%
-  p(x) = \lambda^x exp(-\lambda)/x!}
-for \eqn{x = 0, 1, 2, \ldots}.
 }
 \examples{
 x <- c(15, 36, 17)

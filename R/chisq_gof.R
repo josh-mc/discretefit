@@ -11,8 +11,19 @@
 #' @param reps an integer specifying the number of Monte Carlo simulations. The default
 #'     is set to 10,000 which may be appropriate for exploratory analysis. A higher
 #'     number of simulation should be selected for more precise results.
+#'@param tolerance sets an upper bound for rounding errors when evaluating
+#'    whether a statistic for a simulation is greater than or equal to the
+#'    statistic for the observed data. The default is identical to the tolerance
+#'    set for simulations in the `chisq.test` function from the `stats`
+#'    package in base R.
 #'
-#' @return A number representing the p-value.
+#'@return A list with class "htest" containing the following components:
+#'
+#' \item{statistic}{the value of the Chi-squared test statistic}
+#' \item{p.value}{the simulated p-value for the test}
+#' \item{method}{a character string describing the test}
+#' \item{data.name}{a character string give the name of the data}
+#'
 #' @export
 #'
 #' @examples
@@ -25,12 +36,23 @@
 #' @useDynLib discretefit
 
 
-chisq_gof <- function(x, p, reps = 10000)  {
+chisq_gof <- function(x, p, reps = 10000, tolerance = 64 * .Machine$double.eps)  {
 
   errors_x_p(x, p)
 
-  out <- simulate_p(2, x, p, reps)
+  out <- simulate_p(2, x, p, reps, tolerance)
 
-  return(out)
+  names(out$statistic) <- "Chi-squared"
+
+  val <- list(p.value = out$p_value,
+              statistic = out$statistic,
+              method = "Simulated Chi-squared goodness-of-fit test",
+              data.name = deparse(substitute(x)),
+              class = "htest")
+
+  class(val) <- "htest"
+
+  return(val)
 
 }
+

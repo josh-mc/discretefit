@@ -18,6 +18,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ks_mod_p
+double ks_mod_p(IntegerVector vector_1, IntegerVector uni_2, int n_bins, NumericVector vec_2_frac);
+RcppExport SEXP _discretefit_ks_mod_p(SEXP vector_1SEXP, SEXP uni_2SEXP, SEXP n_binsSEXP, SEXP vec_2_fracSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type vector_1(vector_1SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type uni_2(uni_2SEXP);
+    Rcpp::traits::input_parameter< int >::type n_bins(n_binsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vec_2_frac(vec_2_fracSEXP);
+    rcpp_result_gen = Rcpp::wrap(ks_mod_p(vector_1, uni_2, n_bins, vec_2_frac));
+    return rcpp_result_gen;
+END_RCPP
+}
 // ks_gof_cpp
 double ks_gof_cpp(NumericVector vector_1, NumericVector vec_2_frac, double reps);
 RcppExport SEXP _discretefit_ks_gof_cpp(SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP) {
@@ -28,6 +42,32 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type vec_2_frac(vec_2_fracSEXP);
     Rcpp::traits::input_parameter< double >::type reps(repsSEXP);
     rcpp_result_gen = Rcpp::wrap(ks_gof_cpp(vector_1, vec_2_frac, reps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ks_stat
+double ks_stat(NumericVector vector_1, NumericVector vec_2_frac, double reps);
+RcppExport SEXP _discretefit_ks_stat(SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type vector_1(vector_1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vec_2_frac(vec_2_fracSEXP);
+    Rcpp::traits::input_parameter< double >::type reps(repsSEXP);
+    rcpp_result_gen = Rcpp::wrap(ks_stat(vector_1, vec_2_frac, reps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ks_stat_df
+DataFrame ks_stat_df(NumericVector vector_1, NumericVector vec_2_frac, double reps);
+RcppExport SEXP _discretefit_ks_stat_df(SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type vector_1(vector_1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vec_2_frac(vec_2_fracSEXP);
+    Rcpp::traits::input_parameter< double >::type reps(repsSEXP);
+    rcpp_result_gen = Rcpp::wrap(ks_stat_df(vector_1, vec_2_frac, reps));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -45,8 +85,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // simulate_p
-double simulate_p(int type, NumericVector vector_1, NumericVector vec_2_frac, double reps);
-RcppExport SEXP _discretefit_simulate_p(SEXP typeSEXP, SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP) {
+List simulate_p(int type, NumericVector vector_1, NumericVector vec_2_frac, double reps, double tolerance);
+RcppExport SEXP _discretefit_simulate_p(SEXP typeSEXP, SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -54,16 +94,20 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type vector_1(vector_1SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type vec_2_frac(vec_2_fracSEXP);
     Rcpp::traits::input_parameter< double >::type reps(repsSEXP);
-    rcpp_result_gen = Rcpp::wrap(simulate_p(type, vector_1, vec_2_frac, reps));
+    Rcpp::traits::input_parameter< double >::type tolerance(toleranceSEXP);
+    rcpp_result_gen = Rcpp::wrap(simulate_p(type, vector_1, vec_2_frac, reps, tolerance));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_discretefit_chisq_gof_cpp", (DL_FUNC) &_discretefit_chisq_gof_cpp, 3},
+    {"_discretefit_ks_mod_p", (DL_FUNC) &_discretefit_ks_mod_p, 4},
     {"_discretefit_ks_gof_cpp", (DL_FUNC) &_discretefit_ks_gof_cpp, 3},
+    {"_discretefit_ks_stat", (DL_FUNC) &_discretefit_ks_stat, 3},
+    {"_discretefit_ks_stat_df", (DL_FUNC) &_discretefit_ks_stat_df, 3},
     {"_discretefit_rms_gof_cpp", (DL_FUNC) &_discretefit_rms_gof_cpp, 3},
-    {"_discretefit_simulate_p", (DL_FUNC) &_discretefit_simulate_p, 4},
+    {"_discretefit_simulate_p", (DL_FUNC) &_discretefit_simulate_p, 5},
     {NULL, NULL, 0}
 };
 

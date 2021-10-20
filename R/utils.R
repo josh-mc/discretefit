@@ -17,7 +17,7 @@ errors_x_p <- function(x, p)  {
     stop("The vector p cannot contain negative probabilities.")
   }
 
-  if(sum(p) != 1) {
-    stop("The probilities in vector p must sum to one.")
+  if(abs(sum(p) - 1) > sqrt(.Machine$double.eps)) {
+    stop("The probabilities in vector p must sum to one.")
   }
 }

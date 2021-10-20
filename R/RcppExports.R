@@ -5,15 +5,27 @@ chisq_gof_cpp <- function(vector_1, vec_2_frac, reps) {
     .Call('_discretefit_chisq_gof_cpp', PACKAGE = 'discretefit', vector_1, vec_2_frac, reps)
 }
 
+ks_mod_p <- function(vector_1, uni_2, n_bins, vec_2_frac) {
+    .Call('_discretefit_ks_mod_p', PACKAGE = 'discretefit', vector_1, uni_2, n_bins, vec_2_frac)
+}
+
 ks_gof_cpp <- function(vector_1, vec_2_frac, reps) {
     .Call('_discretefit_ks_gof_cpp', PACKAGE = 'discretefit', vector_1, vec_2_frac, reps)
+}
+
+ks_stat <- function(vector_1, vec_2_frac, reps) {
+    .Call('_discretefit_ks_stat', PACKAGE = 'discretefit', vector_1, vec_2_frac, reps)
+}
+
+ks_stat_df <- function(vector_1, vec_2_frac, reps) {
+    .Call('_discretefit_ks_stat_df', PACKAGE = 'discretefit', vector_1, vec_2_frac, reps)
 }
 
 rms_gof_cpp <- function(vector_1, vec_2_frac, reps) {
     .Call('_discretefit_rms_gof_cpp', PACKAGE = 'discretefit', vector_1, vec_2_frac, reps)
 }
 
-simulate_p <- function(type, vector_1, vec_2_frac, reps) {
-    .Call('_discretefit_simulate_p', PACKAGE = 'discretefit', type, vector_1, vec_2_frac, reps)
+simulate_p <- function(type, vector_1, vec_2_frac, reps, tolerance) {
+    .Call('_discretefit_simulate_p', PACKAGE = 'discretefit', type, vector_1, vec_2_frac, reps, tolerance)
 }
 
