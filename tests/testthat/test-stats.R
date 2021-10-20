@@ -37,6 +37,8 @@ test_that("rms_gof statistic is correct", {
 
   b <- sqrt(sum((x/sum(x) - p)^2) * 1/length(x))
 
+  #b <- sum((sqrt(sum(x)) * (x/sum(x) - p))^2)
+
   expect_equal(a, b)
 
 })
