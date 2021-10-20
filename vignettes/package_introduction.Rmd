@@ -129,6 +129,7 @@ Dwass, Meyer. "Modified randomization tests for nonparametric hypotheses." Annul
 Eddelbuettel, Dirk and Romain Francois. "Rcpp: Seamless R and C++ Integration." Journal of Statistical Software, 2011. https://www.jstatsoft.org/article/view/v040i08
 
 Lockhart, Richard A., John J. Spinelli and Michael A. Stephens. "Cramer–von Mises statistics for discrete distributions with unknown parameters," Canadian Journal of Statistics, 2007. https://doi.org/10.1002/cjs.5550350111 
+
 Perkins, William, Mark Tygert, and Rachel Ward. "Computing the confidence levels for a root-mean-square test of goodness-of-fit." Applied Mathematics and Computation, 2011. https://doi.org/10.1016/j.amc.2011.03.124
 
 Phipson, Belinda, and Gordon K. Smyth. "Permutation p-values should never be zero: calculating exact p-values when permutations are randomly drawn." Statistical Applications in Genetics and Molecular Biology, 2010. https://doi.org/10.2202/1544-6115.1585

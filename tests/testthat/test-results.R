@@ -45,6 +45,23 @@ test_that("chisq_gof equal to rms_gof for uniform distribution", {
 
 })
 
+skip_on_cran()
+
+test_that("rms_gof is equal to stored result", {
+
+  x <- c(2114, 2128, 2112)
+  p <- c(rep(1/3, 3))
+
+
+  set.seed(40)
+  a <- rms_gof(x, p)$p.value
+
+  b <- 0.966903309669033
+
+  expect_equal(a, b)
+
+})
+
 
 test_that("ks_gof ~equal to ks.test (from dgof package)", {
 
