@@ -23,7 +23,8 @@ test_that("g_gof statistic is equal to G.test statistic (RVAideMemoire)", {
 
   a <- as.numeric(g_gof(x, p, reps = 100)$statistic)
 
-  b <- as.numeric(RVAideMemoire::G.test(x, p)$statistic)
+  b <- 12.1450359514788
+  #b <- as.numeric(RVAideMemoire::G.test(x, p)$statistic)
 
   expect_equal(a, b)
 

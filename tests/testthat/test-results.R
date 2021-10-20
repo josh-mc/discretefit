@@ -86,7 +86,8 @@ test_that("g_gof is ~equal to G.test (from RVAideMemoire package)", {
   set.seed(30)
   a <- g_gof(x, p)$p.value
 
-  b <- as.numeric(RVAideMemoire::G.test(x, p)$p.value)
+  b <- 0.707378226223282
+  #b <- as.numeric(RVAideMemoire::G.test(x, p)$p.value)
 
   expect_equal(tolerance = 0.001, a, b)
 
