@@ -1,4 +1,4 @@
-# discretefit 0.0.0.9001
+# discretefit 0.1.0
 
 * Changed all GOF functions to class 'htest.' This means these functions now return a list that includes the p-value as well as the test statistics. In the previous version, these functions returned a numeric value directly (the p-value).
 * Added the parameter 'tolerance' to all GOF functions. This allows users directly to adjust the tolerance for numerical imprecision.
