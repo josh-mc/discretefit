@@ -9,8 +9,9 @@ Authors@R:
 Description: Implements fast, Monte Carlo simulations for 
     goodness-of-fit (GOF) tests for discrete distributions. This 
     includes tests based on the root-mean-square statistic, the 
-    Chi-squared statistic, the log-likelihood-ratio (G^2) statistic, and 
-    the Kolmogorov-Smirnov statistic.
+    Chi-squared statistic, the log-likelihood-ratio (G^2) statistic,
+    the Freeman-Tukey (Hellinger-distance) statistic, the Kolmogorov-Smirnov 
+    statistic, and the Cramer-von Mises statistic.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -23,8 +24,10 @@ Suggests:
     knitr,
     dgof,
     RVAideMemoire,
+    cvmdisc,
     bench,
     testthat (>= 3.0.0),
     rmarkdown
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+SystemRequirements: C++11

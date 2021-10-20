@@ -85,8 +85,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // simulate_p
-double simulate_p(int type, NumericVector vector_1, NumericVector vec_2_frac, double reps);
-RcppExport SEXP _discretefit_simulate_p(SEXP typeSEXP, SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP) {
+List simulate_p(int type, NumericVector vector_1, NumericVector vec_2_frac, double reps, double tolerance);
+RcppExport SEXP _discretefit_simulate_p(SEXP typeSEXP, SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -94,7 +94,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type vector_1(vector_1SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type vec_2_frac(vec_2_fracSEXP);
     Rcpp::traits::input_parameter< double >::type reps(repsSEXP);
-    rcpp_result_gen = Rcpp::wrap(simulate_p(type, vector_1, vec_2_frac, reps));
+    Rcpp::traits::input_parameter< double >::type tolerance(toleranceSEXP);
+    rcpp_result_gen = Rcpp::wrap(simulate_p(type, vector_1, vec_2_frac, reps, tolerance));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -106,7 +107,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_discretefit_ks_stat", (DL_FUNC) &_discretefit_ks_stat, 3},
     {"_discretefit_ks_stat_df", (DL_FUNC) &_discretefit_ks_stat_df, 3},
     {"_discretefit_rms_gof_cpp", (DL_FUNC) &_discretefit_rms_gof_cpp, 3},
-    {"_discretefit_simulate_p", (DL_FUNC) &_discretefit_simulate_p, 4},
+    {"_discretefit_simulate_p", (DL_FUNC) &_discretefit_simulate_p, 5},
     {NULL, NULL, 0}
 };
 
