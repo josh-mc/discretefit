@@ -2,7 +2,7 @@
 title: "Introducing discretefit"
 output: rmarkdown::html_vignette
 author: Josh McCormick
-date: October 7, 2021
+date: October 20, 2021
 vignette: >
   %\VignetteIndexEntry{package_introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -31,12 +31,6 @@ library(bench)
 x <- c(42, 0, 13, 2, 109)
 p <- c(0.2, 0.05, 0.1, 0.05, 0.6)
 
-pp <- c(rep(1, 4),
-        rep(2, 1),
-        rep(3, 2),
-        rep(4, 1),
-        rep(5, 12))
-
 chisq_gof(x, p)
 rms_gof(x, p)
 g_gof(x, p)
@@ -51,7 +45,7 @@ In a surprising number of cases, a simulated GOF test based on the root-mean-squ
 
 Take a discrete distribution with 50 bins (or categories). The probability for the first and second bin is 0.25. The probability for each of the remaining 48 bins is 0.5 / 48 (~0.0104).  
 
-Now take the observed counts of 15 for the first bin, 5 for the second bin, and zero for each of the remaining 48 bins. It's obvious that these observations are very unlikely to occur for random sample from the above distribution. However, the Chi-squared, $G^2$, and Freeman-Tukey tests fail to reject the null hypothesis. 
+Now take the observed counts of 15 for the first bin, 5 for the second bin, and zero for each of the remaining 48 bins. It's obvious that these observations are very unlikely to occur for a random sample from the above distribution. However, the Chi-squared, $G^2$, and Freeman-Tukey tests fail to reject the null hypothesis. 
 
 ```{r}
 x <- c(15, 5, rep(0, 48))
@@ -76,7 +70,7 @@ The simulated Chi-squared GOF test in `discretefit` produces identical p-values 
 
 ```{r}
 set.seed(499)
-chisq_gof(x, p, reps = 2000)
+chisq_gof(x, p, reps = 2000)$p.value
 set.seed(499)
 chisq.test(x, p = p, simulate.p.value = TRUE)$p.value
 ```
@@ -93,11 +87,11 @@ bench::system_time(
 )
 ```
 
-Additionally, the simulated GOF tests in base R is vectorized, so for large vectors attempting a large number of simulations maybe not be possible because of memory constraints. Since the function in `discretefit` are not vectorized, memory use is minimized. 
+Additionally, the simulated GOF tests in base R is vectorized, so for large vectors attempting a large number of simulations may not be possible because of memory constraints. Since the functions in `discretefit` are not vectorized, memory use is minimized. 
 
 ## Computation
 
-The `cvm_gof` function utilizes the formula for the Cramer-von Mises statistics for discrete distributions originally introduced by Choulakian, Lockhart, and Stephens (1994). Let N represent the number of observations and let k represent the number of bins. Let $S_{i}$ correspond to the empirical cumulative distribution function for the observed data and $T_{i}$ correspond to the cumulative distribution function for the theoretical distribution. Then where $Z_{i}$ = $S_{i}$ - $T_{i}$, the Cramer-von Mises statistic, represented by $W^2$ is defined as follows:
+The `cvm_gof` function utilizes the formula for the Cramer-von Mises statistic for discrete distributions originally introduced by Choulakian, Lockhart, and Stephens (1994). Let N represent the number of observations, let k represent the number of bins, and let $p_{i}$ represent the probability of an observation falling in the $i^{th}$ bin. Furthermore, let $S_{i}$ correspond to the empirical cumulative distribution function for the observed data and $T_{i}$ correspond to the cumulative distribution function for the theoretical distribution. Then where $Z_{i}$ = $S_{i}$ - $T_{i}$, the Cramer-von Mises statistic, represented by $W^2$, is defined as follows:
 
 $$ W^2 =  N^{-1} \sum_{i = 1}^{k} Z_{i}^2p_{i} $$
 For an alternative formula see Lockhart, Spinelli, and Stephens (2007).
@@ -106,7 +100,7 @@ All p-values calculated by the functions in `discretefit` follow the formula for
 
 $${p}_{u} = P(B <= b) = \frac{b + 1}{m + 1}$$
 
-This is the equation used to calculate simulated p-values in the `stats` package but some implementations of simulated p-values, for example the `dgof` package, use the unbiased estimator, $\frac{B}{m}$. For an explanation of why the biased estimator yields a test of the correct size and the unbiased estimator does not, see Phipson and Smyth (2011). 
+This is the equation used to calculate simulated p-values in the `chisq.test` function in the `stats` package but some implementations of simulated p-values, for example the `dgof` package, use the unbiased estimator, $\frac{B}{m}$. For an explanation of why the biased estimator yields a test of the correct size and the unbiased estimator does not, see Phipson and Smyth (2011). 
 
 ## Alternatives 
 
@@ -127,6 +121,8 @@ I'm not aware of another R package that implements a root-mean-square GOF test.
 Arnold, Taylor B. and John W. Emerson. “Nonparametric goodness-of-fit tests for discrete null distributions.” R Journal. https://doi.org/10.32614/rj-2011-016 
 
 Choulakian, V., Richard. A. Lockhart, and Michael A. Stephens. "Cramer–von Mises statistics for discrete distributions." Canadian Journal of Statistics, 1994. https://doi.org/10.2307/3315828 
+
+Dimitrova, Dimitrina S., Vladimir K. Kaishev, and Senren Tan. "Computing the Kolmogorov-Smirnov distribution when the underlying CDF is purely discrete, mixed, or continuos." Journal of Statistical Software, 2020. https://doi.org/10.18637/jss.v095.i10 
 
 Dwass, Meyer. "Modified randomization tests for nonparametric hypotheses." Annuls of Mathematical Statistics, 1957.  https://doi.org/10.1214/aoms/1177707045  
 
