@@ -30,7 +30,8 @@ List simulate_p(int type,
 
     if(type == 1) {
 
-      return rms_stat(vec_1_frac,
+      return rms_stat(draws,
+                      vec_1_frac,
                       vec_2_frac);
 
     }

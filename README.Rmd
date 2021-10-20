@@ -81,7 +81,7 @@ By contrast, the root-mean-square test convincingly rejects the null hypothesis.
 rms_gof(x, p)
 ```
 
-For additional examples, also see Perkins, Tygert, and Ward (2011) and Ward and Carroll (2014). 
+For additional examples, see Perkins, Tygert, and Ward (2011) and Ward and Carroll (2014). 
 
 ## Speed
 

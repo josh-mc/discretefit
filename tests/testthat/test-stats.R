@@ -35,9 +35,9 @@ test_that("rms_gof statistic is correct", {
 
   a <- as.numeric(rms_gof(x, p, reps = 100)$statistic)
 
-  b <- sqrt(sum((x/sum(x) - p)^2) * 1/length(x))
+  #b <- sqrt(sum((x/sum(x) - p)^2) * 1/length(x))
 
-  #b <- sum((sqrt(sum(x)) * (x/sum(x) - p))^2)
+  b <- sum((sqrt(sum(x)) * (x/sum(x) - p))^2)
 
   expect_equal(a, b)
 

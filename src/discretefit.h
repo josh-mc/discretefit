@@ -19,8 +19,9 @@ NumericVector compute_vec_1_frac(IntegerVector vector_1,
 #include <Rcpp.h>
 using namespace Rcpp;
 
-double rms_stat(NumericVector vec_1_frac,
-         NumericVector vec_2_frac);
+double rms_stat(int draws,
+                NumericVector vec_1_frac,
+                NumericVector vec_2_frac);
 
 #endif
 
