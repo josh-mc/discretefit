@@ -6,7 +6,7 @@ double rms_stat(int draws,
                 NumericVector vec_1_frac,
                 NumericVector vec_2_frac)  {
 
-  NumericVector x = pow((sqrt(draws) * (vec_1_frac - vec_2_frac)), 2);
+  NumericVector x = pow((pow(draws, 0.5) * (vec_1_frac - vec_2_frac)), 2);
 
   // Taking the sum of x
   double rms = 0;
@@ -84,7 +84,7 @@ double ft_stat(int draws,
                NumericVector vec_1_frac,
                NumericVector vec_2_frac)  {
 
-  NumericVector x = pow(sqrt(vec_1_frac) - sqrt(vec_2_frac), 2);
+  NumericVector x = pow(pow(vec_1_frac, 0.5) - pow(vec_2_frac, 0.5), 2);
 
   // Taking the sum of x
   double y = 0;
