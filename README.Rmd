@@ -126,7 +126,7 @@ I'm not aware of another R package that implements a root-mean-square GOF test.
 
 Arnold, Taylor B. and John W. Emerson. “Nonparametric goodness-of-fit tests for discrete null distributions.” R Journal. https://doi.org/10.32614/rj-2011-016 
 
-Dimitrova, Dimitrina S., Vladimir K. Kaishev, and Senren Tan. "Computing the Kolmogorov-Smirnov distribution when the underlying CDF is purely discrete, mixed, or continuos." Journal of Statistical Software, 2020. https://doi.org/10.18637/jss.v095.i10 
+Dimitrova, Dimitrina S., Vladimir K. Kaishev, and Senren Tan. "Computing the Kolmogorov-Smirnov distribution when the underlying CDF is purely discrete, mixed, or continuous." Journal of Statistical Software, 2020. https://doi.org/10.18637/jss.v095.i10 
 
 Eddelbuettel, Dirk and Romain Francois. "Rcpp: Seamless R and C++ Integration." Journal of Statistical Software, 2011. https://www.jstatsoft.org/article/view/v040i08
 
