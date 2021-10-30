@@ -56,19 +56,19 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 17.082, p-value = 0.0034
+#> Chi-squared = 17.082, p-value = 0.0021
 rms_gof(x, p)
 #> 
 #>  Simulated root-mean-square goodness-of-fit test
 #> 
 #> data:  x
-#> RMS = 1.731, p-value = 0.0418
+#> RMS = 1.731, p-value = 0.0386
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 27.362, p-value = 2e-04
+#> G2 = 27.362, p-value = 9.999e-05
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
@@ -80,13 +80,13 @@ ks_gof(x, p)
 #>  Simulated Kolmogorov-Smirnov goodness-of-fit test
 #> 
 #> data:  x
-#> KS = 0.056627, p-value = 0.2416
+#> KS = 0.056627, p-value = 0.2377
 cvm_gof(x, p)
 #> 
 #>  Simulated Cramer-von Mises goodness-of-fit test
 #> 
 #> data:  x
-#> W2 = 0.12578, p-value = 0.188
+#> W2 = 0.12578, p-value = 0.185
 ```
 
 ## Root-mean-square statistic
@@ -116,19 +116,19 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 30, p-value = 0.9701
+#> Chi-squared = 30, p-value = 0.9683
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 32.958, p-value = 0.6617
+#> G2 = 32.958, p-value = 0.662
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
 #> 
 #> data:  x
-#> FT = 50.718, p-value = 0.1415
+#> FT = 50.718, p-value = 0.1374
 ```
 
 By contrast, the root-mean-square test convincingly rejects the null
@@ -170,13 +170,13 @@ bench::system_time(
   chisq_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   281ms   303ms
+#>   766ms   875ms
 
 bench::system_time(
   chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   1.97s   2.11s
+#>   2.31s   2.85s
 ```
 
 Additionally, the simulated GOF tests in base R is vectorized, so for
@@ -217,7 +217,7 @@ tests for discrete null distributions.” R Journal.
 
 Dimitrova, Dimitrina S., Vladimir K. Kaishev, and Senren Tan. “Computing
 the Kolmogorov-Smirnov distribution when the underlying CDF is purely
-discrete, mixed, or continuos.” Journal of Statistical Software, 2020.
+discrete, mixed, or continuous.” Journal of Statistical Software, 2020.
 <https://doi.org/10.18637/jss.v095.i10>
 
 Eddelbuettel, Dirk and Romain Francois. “Rcpp: Seamless R and C++

@@ -122,7 +122,7 @@ Arnold, Taylor B. and John W. Emerson. “Nonparametric goodness-of-fit tests fo
 
 Choulakian, V., Richard. A. Lockhart, and Michael A. Stephens. "Cramer–von Mises statistics for discrete distributions." Canadian Journal of Statistics, 1994. https://doi.org/10.2307/3315828 
 
-Dimitrova, Dimitrina S., Vladimir K. Kaishev, and Senren Tan. "Computing the Kolmogorov-Smirnov distribution when the underlying CDF is purely discrete, mixed, or continuos." Journal of Statistical Software, 2020. https://doi.org/10.18637/jss.v095.i10 
+Dimitrova, Dimitrina S., Vladimir K. Kaishev, and Senren Tan. "Computing the Kolmogorov-Smirnov distribution when the underlying CDF is purely discrete, mixed, or continuous." Journal of Statistical Software, 2020. https://doi.org/10.18637/jss.v095.i10 
 
 Dwass, Meyer. "Modified randomization tests for nonparametric hypotheses." Annuls of Mathematical Statistics, 1957.  https://doi.org/10.1214/aoms/1177707045  
 
