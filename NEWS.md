@@ -1,3 +1,7 @@
+# discretefit 0.1.1
+
+* Replaced `sqrt` with `pow` in Rcpp to pacify Solaris. 
+
 # discretefit 0.1.0
 
 * Changed all GOF functions to class 'htest.' This means these functions now return a list that includes the p-value as well as the test statistics. In the previous version, these functions returned a numeric value directly (the p-value).
