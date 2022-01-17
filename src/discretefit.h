@@ -6,9 +6,9 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-NumericVector compute_vec_1_frac(IntegerVector vector_1,
-                                 IntegerVector uni_2,
-                                 int n_bins);
+NumericVector compute_vec_1_frac(IntegerVector x,
+                                 int n_bins,
+                                 int draws);
 
 #endif
 
