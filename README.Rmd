@@ -69,16 +69,18 @@ set.seed(499)
 chisq.test(x, p = p, simulate.p.value = TRUE)$p.value
 ```
 
-However, because Monte Carlo simulations in `discretefit` are implemented in C++, `chisq_gof` is much faster than `chisq.test`, especially when a large number of simulations are required.
+However, because Monte Carlo simulations in `discretefit` are implemented in C++, `chisq_gof` is much faster than `chisq.test`.
 
 ```{r}
-bench::system_time(
-  chisq_gof(x, p, reps = 20000)
+speed <- bench::mark(min_iterations = 1000, check = FALSE, 
+  chisq_gof = chisq_gof(x, p, reps = 2000),
+  chisq.test = chisq.test(x, p = p, simulate.p.value = TRUE, B = 2000)
 )
 
-bench::system_time(
-  chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
-)
+ggplot2::autoplot(speed) +
+  ggplot2::theme_minimal() +
+  ggplot2::xlab(NULL) +
+  ggplot2::ylab(NULL) 
 ```
 
 Additionally, the simulated GOF tests in base R is vectorized, so for large vectors attempting a large number of simulations may not be possible because of memory constraints. Since the functions in `discretefit` are not vectorized, memory use is minimized. 
