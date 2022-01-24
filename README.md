@@ -11,7 +11,7 @@
 
 <!-- badges: end -->
 
-The package `discretefit` implements Monte Carlo simulations for
+The package `discretefit` implements fast Monte Carlo simulations for
 goodness-of-fit (GOF) tests for discrete distributions. This includes
 tests based on the root-mean-square statistic, the Chi-squared
 statistic, the log-likelihood-ratio (*G*<sup>2</sup>) statistic, the
@@ -56,13 +56,13 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 17.082, p-value = 0.0031
+#> Chi-squared = 17.082, p-value = 0.0022
 rms_gof(x, p)
 #> 
 #>  Simulated root-mean-square goodness-of-fit test
 #> 
 #> data:  x
-#> RMS = 1.731, p-value = 0.0387
+#> RMS = 1.731, p-value = 0.0367
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
@@ -80,13 +80,13 @@ ks_gof(x, p)
 #>  Simulated Kolmogorov-Smirnov goodness-of-fit test
 #> 
 #> data:  x
-#> KS = 0.056627, p-value = 0.2429
+#> KS = 0.056627, p-value = 0.2357
 cvm_gof(x, p)
 #> 
 #>  Simulated Cramer-von Mises goodness-of-fit test
 #> 
 #> data:  x
-#> W2 = 0.12578, p-value = 0.1811
+#> W2 = 0.12578, p-value = 0.1881
 ```
 
 ## Speed
@@ -105,22 +105,24 @@ chisq.test(x, p = p, simulate.p.value = TRUE)$p.value
 ```
 
 However, because Monte Carlo simulations in `discretefit` are
-implemented in C++, `chisq_gof` is much faster than `chisq.test`,
-especially when a large number of simulations are required.
+implemented in C++, `chisq_gof` is much faster than `chisq.test`, \~20
+times faster for the following case.
 
 ``` r
-bench::system_time(
-  chisq_gof(x, p, reps = 20000)
+speed <- bench::mark(min_iterations = 1000, check = FALSE, 
+  chisq_gof = chisq_gof(x, p, reps = 2000),
+  chisq.test = chisq.test(x, p = p, simulate.p.value = TRUE, B = 2000)
 )
-#> process    real 
-#>  78.1ms 100.4ms
+#> Warning: Some expressions had a GC in every iteration; so filtering is disabled.
 
-bench::system_time(
-  chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
-)
-#> process    real 
-#>   1.92s   1.97s
+ggplot2::autoplot(speed) +
+  ggplot2::theme_minimal() +
+  ggplot2::xlab(NULL) +
+  ggplot2::ylab(NULL) 
+#> Loading required namespace: tidyr
 ```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 Additionally, the simulated GOF tests in base R is vectorized, so for
 large vectors attempting a large number of simulations may not be
@@ -154,19 +156,19 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 30, p-value = 0.9695
+#> Chi-squared = 30, p-value = 0.9681
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 32.958, p-value = 0.6613
+#> G2 = 32.958, p-value = 0.6627
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
 #> 
 #> data:  x
-#> FT = 50.718, p-value = 0.1318
+#> FT = 50.718, p-value = 0.141
 ```
 
 By contrast, the root-mean-square test convincingly rejects the null
