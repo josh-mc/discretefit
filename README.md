@@ -56,13 +56,13 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 17.082, p-value = 0.0021
+#> Chi-squared = 17.082, p-value = 0.002
 rms_gof(x, p)
 #> 
 #>  Simulated root-mean-square goodness-of-fit test
 #> 
 #> data:  x
-#> RMS = 1.731, p-value = 0.0386
+#> RMS = 1.731, p-value = 0.037
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
@@ -80,13 +80,13 @@ ks_gof(x, p)
 #>  Simulated Kolmogorov-Smirnov goodness-of-fit test
 #> 
 #> data:  x
-#> KS = 0.056627, p-value = 0.2377
+#> KS = 0.056627, p-value = 0.2337
 cvm_gof(x, p)
 #> 
 #>  Simulated Cramer-von Mises goodness-of-fit test
 #> 
 #> data:  x
-#> W2 = 0.12578, p-value = 0.185
+#> W2 = 0.12578, p-value = 0.184
 ```
 
 ## Root-mean-square statistic
@@ -116,7 +116,7 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 30, p-value = 0.9683
+#> Chi-squared = 30, p-value = 0.9713
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
@@ -128,7 +128,7 @@ ft_gof(x, p)
 #>  Simulated Freeman-Tukey goodness-of-fit test
 #> 
 #> data:  x
-#> FT = 50.718, p-value = 0.1374
+#> FT = 50.718, p-value = 0.1352
 ```
 
 By contrast, the root-mean-square test convincingly rejects the null
@@ -170,13 +170,13 @@ bench::system_time(
   chisq_gof(x, p, reps = 20000)
 )
 #> process    real 
-#>   766ms   875ms
+#>  62.5ms  60.8ms
 
 bench::system_time(
   chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
 )
 #> process    real 
-#>   2.31s   2.85s
+#>   1.72s   1.73s
 ```
 
 Additionally, the simulated GOF tests in base R is vectorized, so for
