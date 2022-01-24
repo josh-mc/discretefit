@@ -11,7 +11,7 @@
 
 <!-- badges: end -->
 
-The package `discretefit` implements Monte Carlo simulations for
+The package `discretefit` implements fast Monte Carlo simulations for
 goodness-of-fit (GOF) tests for discrete distributions. This includes
 tests based on the root-mean-square statistic, the Chi-squared
 statistic, the log-likelihood-ratio (*G*<sup>2</sup>) statistic, the
@@ -56,19 +56,19 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 17.082, p-value = 0.0021
+#> Chi-squared = 17.082, p-value = 0.0022
 rms_gof(x, p)
 #> 
 #>  Simulated root-mean-square goodness-of-fit test
 #> 
 #> data:  x
-#> RMS = 1.731, p-value = 0.0386
+#> RMS = 1.731, p-value = 0.0377
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 27.362, p-value = 9.999e-05
+#> G2 = 27.362, p-value = 2e-04
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
@@ -80,14 +80,54 @@ ks_gof(x, p)
 #>  Simulated Kolmogorov-Smirnov goodness-of-fit test
 #> 
 #> data:  x
-#> KS = 0.056627, p-value = 0.2377
+#> KS = 0.056627, p-value = 0.2412
 cvm_gof(x, p)
 #> 
 #>  Simulated Cramer-von Mises goodness-of-fit test
 #> 
 #> data:  x
-#> W2 = 0.12578, p-value = 0.185
+#> W2 = 0.12578, p-value = 0.1841
 ```
+
+## Speed
+
+The simulated Chi-squared GOF test in `discretefit` produces identical
+p-values to the simulated Chi-squared GOF test in the `stats` package
+that is part of base R.
+
+``` r
+set.seed(499)
+chisq_gof(x, p, reps = 2000)$p.value
+#> [1] 0.002998501
+set.seed(499)
+chisq.test(x, p = p, simulate.p.value = TRUE)$p.value
+#> [1] 0.002998501
+```
+
+However, because Monte Carlo simulations in `discretefit` are
+implemented in C++, `chisq_gof` is much faster than `chisq.test`, \~20
+times faster for the following case.
+
+``` r
+speed <- bench::mark(min_iterations = 1000, check = FALSE, 
+  chisq_gof = chisq_gof(x, p, reps = 2000),
+  chisq.test = chisq.test(x, p = p, simulate.p.value = TRUE, B = 2000)
+)
+#> Warning: Some expressions had a GC in every iteration; so filtering is disabled.
+
+ggplot2::autoplot(speed) +
+  ggplot2::theme_minimal() +
+  ggplot2::xlab(NULL) +
+  ggplot2::ylab(NULL) 
+#> Loading required namespace: tidyr
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+Additionally, the simulated GOF tests in base R is vectorized, so for
+large vectors attempting a large number of simulations may not be
+possible because of memory constraints. Since the functions in
+`discretefit` are not vectorized, memory use is minimized.
 
 ## Root-mean-square statistic
 
@@ -116,19 +156,19 @@ chisq_gof(x, p)
 #>  Simulated Chi-squared goodness-of-fit test
 #> 
 #> data:  x
-#> Chi-squared = 30, p-value = 0.9683
+#> Chi-squared = 30, p-value = 0.9681
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 32.958, p-value = 0.662
+#> G2 = 32.958, p-value = 0.6627
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
 #> 
 #> data:  x
-#> FT = 50.718, p-value = 0.1374
+#> FT = 50.718, p-value = 0.141
 ```
 
 By contrast, the root-mean-square test convincingly rejects the null
@@ -145,44 +185,6 @@ rms_gof(x, p)
 
 For additional examples, see Perkins, Tygert, and Ward (2011) and Ward
 and Carroll (2014).
-
-## Speed
-
-The simulated Chi-squared GOF test in `discretefit` produces identical
-p-values to the simulated Chi-squared GOF test in the `stats` package
-that is part of base R.
-
-``` r
-set.seed(499)
-chisq_gof(x, p, reps = 2000)$p.value
-#> [1] 0.9685157
-set.seed(499)
-chisq.test(x, p = p, simulate.p.value = TRUE)$p.value
-#> [1] 0.9685157
-```
-
-However, because Monte Carlo simulations in `discretefit` are
-implemented in C++, `chisq_gof` is much faster than `chisq.test`,
-especially when a large number of simulations are required.
-
-``` r
-bench::system_time(
-  chisq_gof(x, p, reps = 20000)
-)
-#> process    real 
-#>   766ms   875ms
-
-bench::system_time(
-  chisq.test(x, p = p, simulate.p.value = TRUE, B = 20000)
-)
-#> process    real 
-#>   2.31s   2.85s
-```
-
-Additionally, the simulated GOF tests in base R is vectorized, so for
-large vectors attempting a large number of simulations may not be
-possible because of memory constraints. Since the functions in
-`discretefit` are not vectorized, memory use is minimized.
 
 ## Alternatives
 

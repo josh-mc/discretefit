@@ -95,8 +95,9 @@ List simulate_p(int type,
 
     IntegerVector sam_0 = sample(n_bins, draws, true, vec_2_frac);
     NumericVector sam_0_frac = compute_vec_1_frac(sam_0,
-                                                 uni_2,
-                                                 n_bins);
+                                                 n_bins,
+                                                 draws);
+
 
     double sam_statistic = stat_fun(type,
                                     sam_0_frac,

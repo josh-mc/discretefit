@@ -1,3 +1,7 @@
+# discretefit 0.1.2
+
+* Significantly increased speed by rewriting tabulate function.
+
 # discretefit 0.1.1
 
 * Replaced `sqrt` with `pow` in Rcpp to pacify Solaris. 

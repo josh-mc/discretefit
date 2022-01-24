@@ -2,7 +2,7 @@
 title: "Introducing discretefit"
 output: rmarkdown::html_vignette
 author: Josh McCormick
-date: October 20, 2021
+date: January 24, 2022
 vignette: >
   %\VignetteIndexEntry{package_introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The package `discretefit` implements Monte Carlo simulations for goodness-of-fit (GOF) tests for discrete distributions. This includes tests based on the root-mean-square statistic, the Chi-squared statistic, the log-likelihood-ratio ($G^2$) statistic, the Freeman-Tukey (Hellinger-distance) statistic, the Kolmogorov-Smirnov statistic, and the Cramer-von Mises statistic.
+The package `discretefit` implements fast Monte Carlo simulations for goodness-of-fit (GOF) tests for discrete distributions. This includes tests based on the root-mean-square statistic, the Chi-squared statistic, the log-likelihood-ratio ($G^2$) statistic, the Freeman-Tukey (Hellinger-distance) statistic, the Kolmogorov-Smirnov statistic, and the Cramer-von Mises statistic.
 
 Simulations are written in C++ (utilizing `Rcpp`) and are considerably faster than the simulated Chi-squared GOF test in the R `stats` package. 
 
@@ -91,9 +91,34 @@ Additionally, the simulated GOF tests in base R is vectorized, so for large vect
 
 ## Computation
 
-The `cvm_gof` function utilizes the formula for the Cramer-von Mises statistic for discrete distributions originally introduced by Choulakian, Lockhart, and Stephens (1994). Let N represent the number of observations, let k represent the number of bins, and let $p_{i}$ represent the probability of an observation falling in the $i^{th}$ bin. Furthermore, let $S_{i}$ correspond to the empirical cumulative distribution function for the observed data and $T_{i}$ correspond to the cumulative distribution function for the theoretical distribution. Then where $Z_{i}$ = $S_{i}$ - $T_{i}$, the Cramer-von Mises statistic, represented by $W^2$, is defined as follows:
+Let $N$ represent the number of observations, let $k$ represent the number of bins, let $p_{i}$ represent the expected fraction of observations in the $i^{th}$ bin, and let $q_{i}$ represent the observed fraction of observations in the $i^{th}$ bin. Pearson's chi-squared is defined as follows (Pearson, 1900):
 
-$$ W^2 =  N^{-1} \sum_{i = 1}^{k} Z_{i}^2p_{i} $$
+$$
+X^2 = \sum_{i = 1}^{k} \frac{(q_{i} - p_{i})^2} {p_{i}} 
+$$
+The log-likelihood ratio statistic is defined as follows under the convention that $q_{i}$ ln($\frac{q_{i}} {p_{i}}$) = 0 when $q_{i}$ = 0.
+
+$$ 
+G^2 = 2N \sum_{i = 1}^{k} q_{i} \ln(\frac{q_{i}} {p_{i}}) 
+$$
+The Freeman-Tukey statistic was introduced by Freeman and Tukey (1950). For application to GOF tests see Cressie and Read (1984).
+
+$$ FT = 4N \sum_{i = 1}^{k} (\sqrt{q_{i}} - \sqrt{p_{i}})^2 $$
+Finally, the root-mean-square statistic is defined as follows:
+
+$$ RMS = \sqrt{N^{-1} \sum_{i = 1}^{k} (q_{i} - p_{i})^2}$$
+
+For statistics based on the empirical cumulative distribution function, let $S_{i}$ correspond to the empirical cumulative distribution function for the observed data, $T_{i}$ correspond to the cumulative distribution function for the theoretical distribution, and $Z_{i}$ = $S_{i}$ - $T_{i}$.
+
+The Kolmogorov-Smirnov statistics for discrete distributions as defined by Pettitt and Stephens is as follows (1977):
+
+$$
+KS = \max_{1 \le i \le k} |Z_i|
+$$
+
+The `cvm_gof` function utilizes the formula for the Cramer-von Mises statistic for discrete distributions originally introduced by Choulakian, Lockhart, and Stephens (1994). 
+
+$$ CVM =  N^{-1} \sum_{i = 1}^{k} Z_{i}^2p_{i} $$
 For an alternative formula see Lockhart, Spinelli, and Stephens (2007).
 
 All p-values calculated by the functions in `discretefit` follow the formula for simulated p-values proposed by Dwass (1957). For the below equation, let m represent the number of simulations and let B represent the number of simulations where the test statistic for the simulated data is greater than or equal to the test statistic for the observed data. 
@@ -112,7 +137,7 @@ I'm not aware of an R package that implements a simulated $G^2$ GOF test but the
 
 The `dgof` package (Anderson and Emerson 2011) implements simulated Kolmogorov-Smirnov GOF tests and simulated Cramer-von Mises GOF tests . The `cvmdisc` package also implements a simulated Cramer-von Mises GOF test. 
 
-The `KSgeneral` package (Dimitrova, Kaishev, and Tan, 2020) implements exact Kolmogorov-Smirnov GOF tests and fast, simulated GOF tests utilizing the algorithm introduced by Wood and Altavela (1978) which depends on asymptotic properties. 
+The `KSgeneral` package (Dimitrova, Kaishev, and Tan, 2020) implements exact Kolmogorov-Smirnov GOF tests and fast, simulated GOF tests utilizing the algorithm introduced by Wood and Altavela (1978).
 
 I'm not aware of another R package that implements a root-mean-square GOF test.
 
@@ -122,15 +147,23 @@ Arnold, Taylor B. and John W. Emerson. “Nonparametric goodness-of-fit tests fo
 
 Choulakian, V., Richard. A. Lockhart, and Michael A. Stephens. "Cramer–von Mises statistics for discrete distributions." Canadian Journal of Statistics, 1994. https://doi.org/10.2307/3315828 
 
+Cressie, N. and Read, T.R. "Multinomial goodness-of-fit tests." Journal of the Royal Statistical Society, 1984. https://doi.org/10.1111/j.2517-6161.1984.tb01318.x
+
 Dimitrova, Dimitrina S., Vladimir K. Kaishev, and Senren Tan. "Computing the Kolmogorov-Smirnov distribution when the underlying CDF is purely discrete, mixed, or continuous." Journal of Statistical Software, 2020. https://doi.org/10.18637/jss.v095.i10 
 
 Dwass, Meyer. "Modified randomization tests for nonparametric hypotheses." Annuls of Mathematical Statistics, 1957.  https://doi.org/10.1214/aoms/1177707045  
 
 Eddelbuettel, Dirk and Romain Francois. "Rcpp: Seamless R and C++ Integration." Journal of Statistical Software, 2011. https://www.jstatsoft.org/article/view/v040i08
 
-Lockhart, Richard A., John J. Spinelli and Michael A. Stephens. "Cramer–von Mises statistics for discrete distributions with unknown parameters," Canadian Journal of Statistics, 2007. https://doi.org/10.1002/cjs.5550350111 
+Freeman, Murray F. and John W. Tukey. "Transformations related to the angular and the square root." The Annals of Mathematical Statistics, 1950. https://doi.org/10.1214/aoms/1177729756
+
+Lockhart, Richard A., John J. Spinelli and Michael A. Stephens. "Cramer–von Mises statistics for discrete distributions with unknown parameters." Canadian Journal of Statistics, 2007. https://doi.org/10.1002/cjs.5550350111 
+
+Pearson, Karl. "On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling." Philosophical Magazine, 1900.  
 
 Perkins, William, Mark Tygert, and Rachel Ward. "Computing the confidence levels for a root-mean-square test of goodness-of-fit." Applied Mathematics and Computation, 2011. https://doi.org/10.1016/j.amc.2011.03.124
+
+Pettitt, Anthony N., Stephens, Michael A. "The Kolmogorov–Smirnov goodness-of-fit statistic with discrete and grouped data." Technometrics, 1977. https://doi.org/10.2307/1268631 
 
 Phipson, Belinda, and Gordon K. Smyth. "Permutation p-values should never be zero: calculating exact p-values when permutations are randomly drawn." Statistical Applications in Genetics and Molecular Biology, 2010. https://doi.org/10.2202/1544-6115.1585
 
