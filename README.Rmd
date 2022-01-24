@@ -72,6 +72,7 @@ chisq.test(x, p = p, simulate.p.value = TRUE)$p.value
 However, because Monte Carlo simulations in `discretefit` are implemented in C++, `chisq_gof` is much faster than `chisq.test`, ~20 times faster for the following case.
 
 ```{r fig.height=3}
+
 speed <- bench::mark(min_iterations = 1000, check = FALSE, 
   chisq_gof = chisq_gof(x, p, reps = 2000),
   chisq.test = chisq.test(x, p = p, simulate.p.value = TRUE, B = 2000)

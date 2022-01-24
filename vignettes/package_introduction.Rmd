@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The package `discretefit` implements Monte Carlo simulations for goodness-of-fit (GOF) tests for discrete distributions. This includes tests based on the root-mean-square statistic, the Chi-squared statistic, the log-likelihood-ratio ($G^2$) statistic, the Freeman-Tukey (Hellinger-distance) statistic, the Kolmogorov-Smirnov statistic, and the Cramer-von Mises statistic.
+The package `discretefit` implements fast Monte Carlo simulations for goodness-of-fit (GOF) tests for discrete distributions. This includes tests based on the root-mean-square statistic, the Chi-squared statistic, the log-likelihood-ratio ($G^2$) statistic, the Freeman-Tukey (Hellinger-distance) statistic, the Kolmogorov-Smirnov statistic, and the Cramer-von Mises statistic.
 
 Simulations are written in C++ (utilizing `Rcpp`) and are considerably faster than the simulated Chi-squared GOF test in the R `stats` package. 
 

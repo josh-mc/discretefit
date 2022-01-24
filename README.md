@@ -62,13 +62,13 @@ rms_gof(x, p)
 #>  Simulated root-mean-square goodness-of-fit test
 #> 
 #> data:  x
-#> RMS = 1.731, p-value = 0.0367
+#> RMS = 1.731, p-value = 0.0377
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 27.362, p-value = 9.999e-05
+#> G2 = 27.362, p-value = 2e-04
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
@@ -80,13 +80,13 @@ ks_gof(x, p)
 #>  Simulated Kolmogorov-Smirnov goodness-of-fit test
 #> 
 #> data:  x
-#> KS = 0.056627, p-value = 0.2357
+#> KS = 0.056627, p-value = 0.2412
 cvm_gof(x, p)
 #> 
 #>  Simulated Cramer-von Mises goodness-of-fit test
 #> 
 #> data:  x
-#> W2 = 0.12578, p-value = 0.1881
+#> W2 = 0.12578, p-value = 0.1841
 ```
 
 ## Speed
