@@ -62,13 +62,13 @@ rms_gof(x, p)
 #>  Simulated root-mean-square goodness-of-fit test
 #> 
 #> data:  x
-#> RMS = 1.731, p-value = 0.0377
+#> RMS = 1.731, p-value = 0.0389
 g_gof(x, p)
 #> 
 #>  Simulated log-likelihood-ratio goodness-of-fit test
 #> 
 #> data:  x
-#> G2 = 27.362, p-value = 2e-04
+#> G2 = 27.362, p-value = 9.999e-05
 ft_gof(x, p)
 #> 
 #>  Simulated Freeman-Tukey goodness-of-fit test
@@ -80,13 +80,13 @@ ks_gof(x, p)
 #>  Simulated Kolmogorov-Smirnov goodness-of-fit test
 #> 
 #> data:  x
-#> KS = 0.056627, p-value = 0.2412
+#> KS = 0.056627, p-value = 0.2404
 cvm_gof(x, p)
 #> 
 #>  Simulated Cramer-von Mises goodness-of-fit test
 #> 
 #> data:  x
-#> W2 = 0.12578, p-value = 0.1841
+#> W2 = 0.12578, p-value = 0.1784
 ```
 
 ## Speed
@@ -205,8 +205,7 @@ test.
 
 The `KSgeneral` package (Dimitrova, Kaishev, and Tan, 2020) implements
 exact Kolmogorov-Smirnov GOF tests and fast, simulated GOF tests
-utilizing the algorithm introduced by Wood and Altavela (1978) which
-depends on asymptotic properties.
+utilizing the algorithm introduced by Wood and Altavela (1978).
 
 I’m not aware of another R package that implements a root-mean-square
 GOF test.

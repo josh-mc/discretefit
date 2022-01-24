@@ -121,7 +121,7 @@ I'm not aware of an R package that implements a simulated $G^2$ GOF test but the
 
 The `dgof` package (Anderson and Emerson 2011) implements simulated Kolmogorov-Smirnov GOF tests and simulated Cramer-von Mises GOF tests . The `cvmdisc` package also implements a simulated Cramer-von Mises GOF test. 
 
-The `KSgeneral` package (Dimitrova, Kaishev, and Tan, 2020) implements exact Kolmogorov-Smirnov GOF tests and fast, simulated GOF tests utilizing the algorithm introduced by Wood and Altavela (1978) which depends on asymptotic properties. 
+The `KSgeneral` package (Dimitrova, Kaishev, and Tan, 2020) implements exact Kolmogorov-Smirnov GOF tests and fast, simulated GOF tests utilizing the algorithm introduced by Wood and Altavela (1978).
 
 I'm not aware of another R package that implements a root-mean-square GOF test.
 
