@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // simulate_p
 List simulate_p(int type, NumericVector vector_1, NumericVector vec_2_frac, double reps, double tolerance);
 RcppExport SEXP _discretefit_simulate_p(SEXP typeSEXP, SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP, SEXP toleranceSEXP) {
@@ -20,9 +25,50 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// RCONT_setup
+IntegerVector RCONT_setup(IntegerVector c_sums);
+RcppExport SEXP _discretefit_RCONT_setup(SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(RCONT_setup(c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RCONT_tab
+IntegerVector RCONT_tab(IntegerVector x, int bins, int a, int b);
+RcppExport SEXP _discretefit_RCONT_tab(SEXP xSEXP, SEXP binsSEXP, SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type bins(binsSEXP);
+    Rcpp::traits::input_parameter< int >::type a(aSEXP);
+    Rcpp::traits::input_parameter< int >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(RCONT_tab(x, bins, a, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RCONT_simulate
+IntegerVector RCONT_simulate(IntegerVector v, IntegerVector r_sum, IntegerVector c_sum);
+RcppExport SEXP _discretefit_RCONT_simulate(SEXP vSEXP, SEXP r_sumSEXP, SEXP c_sumSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type v(vSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sum(r_sumSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sum(c_sumSEXP);
+    rcpp_result_gen = Rcpp::wrap(RCONT_simulate(v, r_sum, c_sum));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_discretefit_simulate_p", (DL_FUNC) &_discretefit_simulate_p, 5},
+    {"_discretefit_RCONT_setup", (DL_FUNC) &_discretefit_RCONT_setup, 1},
+    {"_discretefit_RCONT_tab", (DL_FUNC) &_discretefit_RCONT_tab, 4},
+    {"_discretefit_RCONT_simulate", (DL_FUNC) &_discretefit_RCONT_simulate, 3},
     {NULL, NULL, 0}
 };
 

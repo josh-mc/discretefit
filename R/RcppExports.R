@@ -5,3 +5,15 @@ simulate_p <- function(type, vector_1, vec_2_frac, reps, tolerance) {
     .Call('_discretefit_simulate_p', PACKAGE = 'discretefit', type, vector_1, vec_2_frac, reps, tolerance)
 }
 
+RCONT_setup <- function(c_sums) {
+    .Call('_discretefit_RCONT_setup', PACKAGE = 'discretefit', c_sums)
+}
+
+RCONT_tab <- function(x, bins, a, b) {
+    .Call('_discretefit_RCONT_tab', PACKAGE = 'discretefit', x, bins, a, b)
+}
+
+RCONT_simulate <- function(v, r_sum, c_sum) {
+    .Call('_discretefit_RCONT_simulate', PACKAGE = 'discretefit', v, r_sum, c_sum)
+}
+
