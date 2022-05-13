@@ -1,8 +1,6 @@
 
 
-
-
-test_that("RCONT_setup = example_1", {
+test_that("RCONT_setup works", {
 
   x <- c(1:7)
 
@@ -27,9 +25,27 @@ test_that("RCONT_setup = example_1", {
   }
 
   a <- RCONT_setup_r(x)
-
-  b <- RCONT_setup(x) + 1 #b/c this indexes starting at 0 instead of 1
+  b <- RCONT_setup(x)
 
   expect_equal(a, b)
 
 })
+
+test_that("RCONT tables equal rowSums/colSums", {
+
+  mat <- matrix(data = 1:16, ncol = 4)
+
+  r_sum <- rowSums(mat)
+  c_sum <- rowSums(mat)
+
+  v <-RCONT_setup(c_sum)
+  a <- RCONT_simulate(v, r_sum, c_sum)
+  b <- matrix(a, ncol = 4)
+  r <- rowSums(b)
+  c <- colSums(b)
+
+  expect_equal(r_sum, r)
+  expect_equal(c_sum, c)
+
+})
+

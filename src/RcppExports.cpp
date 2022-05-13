@@ -25,6 +25,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// chisq_stat
+double chisq_stat(int draws, NumericVector vec_1_frac, NumericVector vec_2_frac);
+RcppExport SEXP _discretefit_chisq_stat(SEXP drawsSEXP, SEXP vec_1_fracSEXP, SEXP vec_2_fracSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type draws(drawsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vec_1_frac(vec_1_fracSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vec_2_frac(vec_2_fracSEXP);
+    rcpp_result_gen = Rcpp::wrap(chisq_stat(draws, vec_1_frac, vec_2_frac));
+    return rcpp_result_gen;
+END_RCPP
+}
 // RCONT_setup
 IntegerVector RCONT_setup(IntegerVector c_sums);
 RcppExport SEXP _discretefit_RCONT_setup(SEXP c_sumsSEXP) {
@@ -63,12 +76,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// RCONT
+List RCONT(int n, IntegerVector r_sum, IntegerVector c_sum);
+RcppExport SEXP _discretefit_RCONT(SEXP nSEXP, SEXP r_sumSEXP, SEXP c_sumSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sum(r_sumSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sum(c_sumSEXP);
+    rcpp_result_gen = Rcpp::wrap(RCONT(n, r_sum, c_sum));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_discretefit_simulate_p", (DL_FUNC) &_discretefit_simulate_p, 5},
+    {"_discretefit_chisq_stat", (DL_FUNC) &_discretefit_chisq_stat, 3},
     {"_discretefit_RCONT_setup", (DL_FUNC) &_discretefit_RCONT_setup, 1},
     {"_discretefit_RCONT_tab", (DL_FUNC) &_discretefit_RCONT_tab, 4},
     {"_discretefit_RCONT_simulate", (DL_FUNC) &_discretefit_RCONT_simulate, 3},
+    {"_discretefit_RCONT", (DL_FUNC) &_discretefit_RCONT, 3},
     {NULL, NULL, 0}
 };
 

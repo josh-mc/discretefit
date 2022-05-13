@@ -5,6 +5,10 @@ simulate_p <- function(type, vector_1, vec_2_frac, reps, tolerance) {
     .Call('_discretefit_simulate_p', PACKAGE = 'discretefit', type, vector_1, vec_2_frac, reps, tolerance)
 }
 
+chisq_stat <- function(draws, vec_1_frac, vec_2_frac) {
+    .Call('_discretefit_chisq_stat', PACKAGE = 'discretefit', draws, vec_1_frac, vec_2_frac)
+}
+
 RCONT_setup <- function(c_sums) {
     .Call('_discretefit_RCONT_setup', PACKAGE = 'discretefit', c_sums)
 }
@@ -15,5 +19,9 @@ RCONT_tab <- function(x, bins, a, b) {
 
 RCONT_simulate <- function(v, r_sum, c_sum) {
     .Call('_discretefit_RCONT_simulate', PACKAGE = 'discretefit', v, r_sum, c_sum)
+}
+
+RCONT <- function(n, r_sum, c_sum) {
+    .Call('_discretefit_RCONT', PACKAGE = 'discretefit', n, r_sum, c_sum)
 }
 

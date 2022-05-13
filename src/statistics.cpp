@@ -18,6 +18,9 @@ double rms_stat(int draws,
   return rms;
 }
 
+
+// [[Rcpp::export]]
+
 double chisq_stat(int draws,
                   NumericVector vec_1_frac,
                   NumericVector vec_2_frac)  {

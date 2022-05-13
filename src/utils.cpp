@@ -38,7 +38,9 @@ IntegerVector RCONT_setup(IntegerVector c_sums)  {
     }
   }
 
-  return wrap(mat_draw);
+  IntegerVector out = wrap(mat_draw);
+
+  return(out + 1);
 
 }
 
@@ -94,5 +96,30 @@ IntegerVector RCONT_simulate(IntegerVector v, IntegerVector r_sum, IntegerVector
   }
 
   return q;
+
+}
+
+
+// [[Rcpp::export]]
+
+List RCONT(int n,
+           IntegerVector r_sum,
+           IntegerVector c_sum)  {
+
+  List return_list(n);
+
+  IntegerVector v = RCONT_setup(c_sum) + 1;
+
+  for(int i = 0; i < n; ++i)  {
+
+    IntegerVector x = RCONT_simulate(v,
+                                  r_sum,
+                                  c_sum);
+
+    return_list[i] = x;
+
+  }
+
+  return(return_list);
 
 }
