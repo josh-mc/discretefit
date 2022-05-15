@@ -47,9 +47,10 @@ bench::mark(min_iterations = 20,
 rsums <- c(500, 500)
 csums <- c(rep(140, 5), 150, 150)
 
-speed <- bench::mark(min_iterations = 20, check = FALSE, 
- rcont2 = r2dtable(1000, rsums, csums),
- rcont = RCONT(1000, rsums, csums)
+speed <- bench::mark(min_iterations = 100, check = FALSE, 
+ rcont2 = r2dtable(10000, rsums, csums),
+ rcont = RCONT(10000, rsums, csums),
+ rcont_cpp = RCONT_cpp(10000, rsums, csums)
 )
 
 ggplot2::autoplot(speed) +
@@ -68,8 +69,9 @@ rsums <- c(17, 17, 17, 17, 16, 16)
 csums <- c(17, 17, 17, 17, 16, 16)
 
 speed <- bench::mark(min_iterations = 20, check = FALSE, 
- rcont2 = r2dtable(1000, rsums, csums),
- rcont = RCONT(1000, rsums, csums)
+ rcont2 = r2dtable(10000, rsums, csums),
+ rcont = RCONT(10000, rsums, csums),
+ rcont_cpp = RCONT_cpp(10000, rsums, csums)
 )
 
 ggplot2::autoplot(speed) +
@@ -88,6 +90,7 @@ rsums <- c(170, 170, 170, 170, 160, 160)
 csums <- c(170, 170, 170, 170, 160, 160)
 
 speed <- bench::mark(min_iterations = 20, check = FALSE, 
+ rcont_cpp = RCONT_cpp(1000, rsums, csums),
  rcont2 = r2dtable(1000, rsums, csums),
  rcont = RCONT(1000, rsums, csums)
 )

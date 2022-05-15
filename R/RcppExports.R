@@ -25,3 +25,27 @@ RCONT <- function(n, r_sum, c_sum) {
     .Call('_discretefit_RCONT', PACKAGE = 'discretefit', n, r_sum, c_sum)
 }
 
+cpp_shuffle <- function() {
+    .Call('_discretefit_cpp_shuffle', PACKAGE = 'discretefit')
+}
+
+RCONT_setup_cpp <- function(c_sums) {
+    .Call('_discretefit_RCONT_setup_cpp', PACKAGE = 'discretefit', c_sums)
+}
+
+RCONT_tab_cpp <- function(v, nbins, a, b) {
+    .Call('_discretefit_RCONT_tab_cpp', PACKAGE = 'discretefit', v, nbins, a, b)
+}
+
+RCONT_simulate_cpp <- function(v, r_sum, c_sum) {
+    .Call('_discretefit_RCONT_simulate_cpp', PACKAGE = 'discretefit', v, r_sum, c_sum)
+}
+
+RCONT_cpp <- function(n, r_sum, c_sum) {
+    .Call('_discretefit_RCONT_cpp', PACKAGE = 'discretefit', n, r_sum, c_sum)
+}
+
+RCONT_cpp2 <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_RCONT_cpp2', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
