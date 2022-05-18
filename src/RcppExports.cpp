@@ -38,6 +38,110 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rcont_j_par_pcg
+List rcont_j_par_pcg(int n, IntegerVector r_sums, IntegerVector c_sums);
+RcppExport SEXP _discretefit_rcont_j_par_pcg(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont_j_par_pcg(n, r_sums, c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont_cpp
+List rcont_cpp(int n, IntegerVector r_sums, IntegerVector c_sums);
+RcppExport SEXP _discretefit_rcont_cpp(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont_cpp(n, r_sums, c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont_j
+List rcont_j(int n, IntegerVector r_sums, IntegerVector c_sums);
+RcppExport SEXP _discretefit_rcont_j(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont_j(n, r_sums, c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont_j_par
+List rcont_j_par(int n, IntegerVector r_sums, IntegerVector c_sums);
+RcppExport SEXP _discretefit_rcont_j_par(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont_j_par(n, r_sums, c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont_cpp2
+List rcont_cpp2(int n, IntegerVector r_sums, IntegerVector c_sums);
+RcppExport SEXP _discretefit_rcont_cpp2(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont_cpp2(n, r_sums, c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont_r
+List rcont_r(int n, IntegerVector r_sums, IntegerVector c_sums);
+RcppExport SEXP _discretefit_rcont_r(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont_r(n, r_sums, c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont_r2
+List rcont_r2(int n, IntegerVector r_sums, IntegerVector c_sums);
+RcppExport SEXP _discretefit_rcont_r2(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont_r2(n, r_sums, c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont_r3
+List rcont_r3(int n, IntegerVector r_sums, IntegerVector c_sums);
+RcppExport SEXP _discretefit_rcont_r3(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont_r3(n, r_sums, c_sums));
+    return rcpp_result_gen;
+END_RCPP
+}
 // RCONT_setup
 IntegerVector RCONT_setup(IntegerVector c_sums);
 RcppExport SEXP _discretefit_RCONT_setup(SEXP c_sumsSEXP) {
@@ -50,16 +154,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // RCONT_tab
-IntegerVector RCONT_tab(IntegerVector x, int bins, int a, int b);
-RcppExport SEXP _discretefit_RCONT_tab(SEXP xSEXP, SEXP binsSEXP, SEXP aSEXP, SEXP bSEXP) {
+IntegerVector RCONT_tab(IntegerVector v, int bins, int a, int b);
+RcppExport SEXP _discretefit_RCONT_tab(SEXP vSEXP, SEXP binsSEXP, SEXP aSEXP, SEXP bSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type v(vSEXP);
     Rcpp::traits::input_parameter< int >::type bins(binsSEXP);
     Rcpp::traits::input_parameter< int >::type a(aSEXP);
     Rcpp::traits::input_parameter< int >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(RCONT_tab(x, bins, a, b));
+    rcpp_result_gen = Rcpp::wrap(RCONT_tab(v, bins, a, b));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -89,77 +193,113 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_shuffle
-IntegerVector cpp_shuffle();
-RcppExport SEXP _discretefit_cpp_shuffle() {
+// shuffle_j
+IntegerVector shuffle_j(IntegerVector x, int seed);
+RcppExport SEXP _discretefit_shuffle_j(SEXP xSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(cpp_shuffle());
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(shuffle_j(x, seed));
     return rcpp_result_gen;
 END_RCPP
 }
-// RCONT_setup_cpp
-std::vector<int> RCONT_setup_cpp(IntegerVector c_sums);
-RcppExport SEXP _discretefit_RCONT_setup_cpp(SEXP c_sumsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
-    rcpp_result_gen = Rcpp::wrap(RCONT_setup_cpp(c_sums));
-    return rcpp_result_gen;
-END_RCPP
-}
-// RCONT_tab_cpp
-std::vector<int> RCONT_tab_cpp(std::vector<int> v, int nbins, int a, int b);
-RcppExport SEXP _discretefit_RCONT_tab_cpp(SEXP vSEXP, SEXP nbinsSEXP, SEXP aSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<int> >::type v(vSEXP);
-    Rcpp::traits::input_parameter< int >::type nbins(nbinsSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    Rcpp::traits::input_parameter< int >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(RCONT_tab_cpp(v, nbins, a, b));
-    return rcpp_result_gen;
-END_RCPP
-}
-// RCONT_simulate_cpp
-IntegerVector RCONT_simulate_cpp(std::vector<int> v, IntegerVector r_sum, IntegerVector c_sum);
-RcppExport SEXP _discretefit_RCONT_simulate_cpp(SEXP vSEXP, SEXP r_sumSEXP, SEXP c_sumSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<int> >::type v(vSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type r_sum(r_sumSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type c_sum(c_sumSEXP);
-    rcpp_result_gen = Rcpp::wrap(RCONT_simulate_cpp(v, r_sum, c_sum));
-    return rcpp_result_gen;
-END_RCPP
-}
-// RCONT_cpp
-List RCONT_cpp(int n, IntegerVector r_sum, IntegerVector c_sum);
-RcppExport SEXP _discretefit_RCONT_cpp(SEXP nSEXP, SEXP r_sumSEXP, SEXP c_sumSEXP) {
+// test_cpp2
+List test_cpp2(int n, int x);
+RcppExport SEXP _discretefit_test_cpp2(SEXP nSEXP, SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type r_sum(r_sumSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type c_sum(c_sumSEXP);
-    rcpp_result_gen = Rcpp::wrap(RCONT_cpp(n, r_sum, c_sum));
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(test_cpp2(n, x));
     return rcpp_result_gen;
 END_RCPP
 }
-// RCONT_cpp2
-List RCONT_cpp2(int n, IntegerVector r_sums, IntegerVector c_sums);
-RcppExport SEXP _discretefit_RCONT_cpp2(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP) {
+// test_pcg
+void test_pcg(int x);
+RcppExport SEXP _discretefit_test_pcg(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    test_pcg(x);
+    return R_NilValue;
+END_RCPP
+}
+// test_mt
+void test_mt(int x);
+RcppExport SEXP _discretefit_test_mt(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    test_mt(x);
+    return R_NilValue;
+END_RCPP
+}
+// test_splitmix
+void test_splitmix(int x);
+RcppExport SEXP _discretefit_test_splitmix(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    test_splitmix(x);
+    return R_NilValue;
+END_RCPP
+}
+// test_xorshift
+void test_xorshift(int x);
+RcppExport SEXP _discretefit_test_xorshift(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    test_xorshift(x);
+    return R_NilValue;
+END_RCPP
+}
+// test_rcpp
+void test_rcpp(int x);
+RcppExport SEXP _discretefit_test_rcpp(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    test_rcpp(x);
+    return R_NilValue;
+END_RCPP
+}
+// shuffle_cpp_pcg
+Rcpp::IntegerVector shuffle_cpp_pcg(Rcpp::IntegerVector x);
+RcppExport SEXP _discretefit_shuffle_cpp_pcg(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(shuffle_cpp_pcg(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// shuffle_j_pcg
+IntegerVector shuffle_j_pcg(IntegerVector x);
+RcppExport SEXP _discretefit_shuffle_j_pcg(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(shuffle_j_pcg(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont3_cpp
+List rcont3_cpp(int n, IntegerVector r_sums, IntegerVector c_sums, int seed);
+RcppExport SEXP _discretefit_rcont3_cpp(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
-    rcpp_result_gen = Rcpp::wrap(RCONT_cpp2(n, r_sums, c_sums));
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont3_cpp(n, r_sums, c_sums, seed));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -167,16 +307,28 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_discretefit_simulate_p", (DL_FUNC) &_discretefit_simulate_p, 5},
     {"_discretefit_chisq_stat", (DL_FUNC) &_discretefit_chisq_stat, 3},
+    {"_discretefit_rcont_j_par_pcg", (DL_FUNC) &_discretefit_rcont_j_par_pcg, 3},
+    {"_discretefit_rcont_cpp", (DL_FUNC) &_discretefit_rcont_cpp, 3},
+    {"_discretefit_rcont_j", (DL_FUNC) &_discretefit_rcont_j, 3},
+    {"_discretefit_rcont_j_par", (DL_FUNC) &_discretefit_rcont_j_par, 3},
+    {"_discretefit_rcont_cpp2", (DL_FUNC) &_discretefit_rcont_cpp2, 3},
+    {"_discretefit_rcont_r", (DL_FUNC) &_discretefit_rcont_r, 3},
+    {"_discretefit_rcont_r2", (DL_FUNC) &_discretefit_rcont_r2, 3},
+    {"_discretefit_rcont_r3", (DL_FUNC) &_discretefit_rcont_r3, 3},
     {"_discretefit_RCONT_setup", (DL_FUNC) &_discretefit_RCONT_setup, 1},
     {"_discretefit_RCONT_tab", (DL_FUNC) &_discretefit_RCONT_tab, 4},
     {"_discretefit_RCONT_simulate", (DL_FUNC) &_discretefit_RCONT_simulate, 3},
     {"_discretefit_RCONT", (DL_FUNC) &_discretefit_RCONT, 3},
-    {"_discretefit_cpp_shuffle", (DL_FUNC) &_discretefit_cpp_shuffle, 0},
-    {"_discretefit_RCONT_setup_cpp", (DL_FUNC) &_discretefit_RCONT_setup_cpp, 1},
-    {"_discretefit_RCONT_tab_cpp", (DL_FUNC) &_discretefit_RCONT_tab_cpp, 4},
-    {"_discretefit_RCONT_simulate_cpp", (DL_FUNC) &_discretefit_RCONT_simulate_cpp, 3},
-    {"_discretefit_RCONT_cpp", (DL_FUNC) &_discretefit_RCONT_cpp, 3},
-    {"_discretefit_RCONT_cpp2", (DL_FUNC) &_discretefit_RCONT_cpp2, 3},
+    {"_discretefit_shuffle_j", (DL_FUNC) &_discretefit_shuffle_j, 2},
+    {"_discretefit_test_cpp2", (DL_FUNC) &_discretefit_test_cpp2, 2},
+    {"_discretefit_test_pcg", (DL_FUNC) &_discretefit_test_pcg, 1},
+    {"_discretefit_test_mt", (DL_FUNC) &_discretefit_test_mt, 1},
+    {"_discretefit_test_splitmix", (DL_FUNC) &_discretefit_test_splitmix, 1},
+    {"_discretefit_test_xorshift", (DL_FUNC) &_discretefit_test_xorshift, 1},
+    {"_discretefit_test_rcpp", (DL_FUNC) &_discretefit_test_rcpp, 1},
+    {"_discretefit_shuffle_cpp_pcg", (DL_FUNC) &_discretefit_shuffle_cpp_pcg, 1},
+    {"_discretefit_shuffle_j_pcg", (DL_FUNC) &_discretefit_shuffle_j_pcg, 1},
+    {"_discretefit_rcont3_cpp", (DL_FUNC) &_discretefit_rcont3_cpp, 4},
     {NULL, NULL, 0}
 };
 

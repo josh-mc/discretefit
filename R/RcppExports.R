@@ -9,12 +9,44 @@ chisq_stat <- function(draws, vec_1_frac, vec_2_frac) {
     .Call('_discretefit_chisq_stat', PACKAGE = 'discretefit', draws, vec_1_frac, vec_2_frac)
 }
 
+rcont_j_par_pcg <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_rcont_j_par_pcg', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
+rcont_cpp <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_rcont_cpp', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
+rcont_j <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_rcont_j', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
+rcont_j_par <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_rcont_j_par', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
+rcont_cpp2 <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_rcont_cpp2', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
+rcont_r <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_rcont_r', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
+rcont_r2 <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_rcont_r2', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
+rcont_r3 <- function(n, r_sums, c_sums) {
+    .Call('_discretefit_rcont_r3', PACKAGE = 'discretefit', n, r_sums, c_sums)
+}
+
 RCONT_setup <- function(c_sums) {
     .Call('_discretefit_RCONT_setup', PACKAGE = 'discretefit', c_sums)
 }
 
-RCONT_tab <- function(x, bins, a, b) {
-    .Call('_discretefit_RCONT_tab', PACKAGE = 'discretefit', x, bins, a, b)
+RCONT_tab <- function(v, bins, a, b) {
+    .Call('_discretefit_RCONT_tab', PACKAGE = 'discretefit', v, bins, a, b)
 }
 
 RCONT_simulate <- function(v, r_sum, c_sum) {
@@ -25,27 +57,43 @@ RCONT <- function(n, r_sum, c_sum) {
     .Call('_discretefit_RCONT', PACKAGE = 'discretefit', n, r_sum, c_sum)
 }
 
-cpp_shuffle <- function() {
-    .Call('_discretefit_cpp_shuffle', PACKAGE = 'discretefit')
+shuffle_j <- function(x, seed) {
+    .Call('_discretefit_shuffle_j', PACKAGE = 'discretefit', x, seed)
 }
 
-RCONT_setup_cpp <- function(c_sums) {
-    .Call('_discretefit_RCONT_setup_cpp', PACKAGE = 'discretefit', c_sums)
+test_cpp2 <- function(n, x) {
+    .Call('_discretefit_test_cpp2', PACKAGE = 'discretefit', n, x)
 }
 
-RCONT_tab_cpp <- function(v, nbins, a, b) {
-    .Call('_discretefit_RCONT_tab_cpp', PACKAGE = 'discretefit', v, nbins, a, b)
+test_pcg <- function(x) {
+    invisible(.Call('_discretefit_test_pcg', PACKAGE = 'discretefit', x))
 }
 
-RCONT_simulate_cpp <- function(v, r_sum, c_sum) {
-    .Call('_discretefit_RCONT_simulate_cpp', PACKAGE = 'discretefit', v, r_sum, c_sum)
+test_mt <- function(x) {
+    invisible(.Call('_discretefit_test_mt', PACKAGE = 'discretefit', x))
 }
 
-RCONT_cpp <- function(n, r_sum, c_sum) {
-    .Call('_discretefit_RCONT_cpp', PACKAGE = 'discretefit', n, r_sum, c_sum)
+test_splitmix <- function(x) {
+    invisible(.Call('_discretefit_test_splitmix', PACKAGE = 'discretefit', x))
 }
 
-RCONT_cpp2 <- function(n, r_sums, c_sums) {
-    .Call('_discretefit_RCONT_cpp2', PACKAGE = 'discretefit', n, r_sums, c_sums)
+test_xorshift <- function(x) {
+    invisible(.Call('_discretefit_test_xorshift', PACKAGE = 'discretefit', x))
+}
+
+test_rcpp <- function(x) {
+    invisible(.Call('_discretefit_test_rcpp', PACKAGE = 'discretefit', x))
+}
+
+shuffle_cpp_pcg <- function(x) {
+    .Call('_discretefit_shuffle_cpp_pcg', PACKAGE = 'discretefit', x)
+}
+
+shuffle_j_pcg <- function(x) {
+    .Call('_discretefit_shuffle_j_pcg', PACKAGE = 'discretefit', x)
+}
+
+rcont3_cpp <- function(n, r_sums, c_sums, seed) {
+    .Call('_discretefit_rcont3_cpp', PACKAGE = 'discretefit', n, r_sums, c_sums, seed)
 }
 

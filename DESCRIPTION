@@ -21,7 +21,8 @@ BugReports: https://github.com/josh-mc/discretefit/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-LinkingTo: 
+LinkingTo:
+    dqrng,
     Rcpp
 Imports: 
     Rcpp
