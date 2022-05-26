@@ -33,14 +33,45 @@ plot_speed <- function(x, reps)  {
 }
 ```
 
+```{r}
+ind_sim2_r <- function(x, reps)  {
+
+  n <- sum(x)
+  nr <- as.integer(nrow(x))
+  nc <- as.integer(ncol(x))
+  sr <- rowSums(x)
+  sc <- colSums(x)
+  E <- outer(sr, sc, "*") / n
+
+  STATISTIC <- sum((x - E)^2 / E)
+
+  ind_sim2(reps = reps,
+          r_sums = sc,
+          c_sums = sr,
+          as.numeric(E),
+          seed = sample.int(.Machine$integer.max, 1),
+          statistic = STATISTIC,
+          tolerance = 0)
+}
+
+```
+
+```{r}
+x <- matrix(data = 1:16, ncol = 4)
+
+ind_sim2_r(x, reps = 10000)
+chisq.test(x, simulate.p.value = TRUE)$p.value
+
+```
+
+
+
 
 ```{r}
 x <- matrix(data = 1:16, ncol = 4)
 
 plot_speed(x, reps = 10000)
 
- 
- 
 ```
 
 ```{r}
@@ -55,6 +86,18 @@ x <- matrix(x, ncol = 5)
 
 plot_speed(x, reps = 1000)
 
+speed <- bench::mark(min_iterations = 100, 
+                       check = FALSE,
+                      discretefit = chisq_ind(x, reps = 1000),
+                      discretefit2 = chisq_ind(x, reps = 1000)
+                       )
+
+  ggplot2::autoplot(speed) +
+    ggplot2::theme_minimal() +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) 
+
+
 ```
 
 ```{r}
@@ -65,7 +108,7 @@ x <- c(48, 17066,
         1, 37)
 
 
-x <- matrix(x, ncol = 2)
+x <- matrix(x, ncol = 2, byrow = TRUE)
 
 plot_speed(x, reps = 1000)
 

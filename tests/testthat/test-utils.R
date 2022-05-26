@@ -7,7 +7,7 @@ test_that("rcont3_cpp tables equal rowSums/colSums", {
   r_sum <- rowSums(mat)
   c_sum <- rowSums(mat)
 
-  a <- unlist(rcont3_cpp(1, c_sum, r_sum, seed = 1002))
+  a <- unlist(rcont3_cpp(1, r_sum, c_sum, seed = 1002))
   b <- matrix(a, ncol = 4)
   r <- rowSums(b)
   c <- colSums(b)
@@ -22,7 +22,7 @@ test_that("rcont_cpp tables equal rowSums/colSums - unequal tables", {
   r_sum <- c(rep(10, 3))
   c_sum <- c(rep(15, 2))
 
-  a <- unlist(rcont3_cpp(1, c_sum, r_sum, seed = 1002))
+  a <- unlist(rcont3_cpp(1, r_sum, c_sum, seed = 1002))
   b <- matrix(a, ncol = 2)
   r <- rowSums(b)
   c <- colSums(b)
@@ -62,11 +62,13 @@ test_that("rcont_cpp generates correct probabilities for lady tasting tea", {
 
 test_that("rcont_cpp ~ r2dtables (3 x 2)", {
 
+  set.seed(393)
+
   n <- 1000
   r_sum <- c(rep(10, 3))
   c_sum <- c(rep(15, 2))
 
-  a <- rcont_cpp(n, c_sum, r_sum)
+  a <- rcont3_cpp(n, r_sum, c_sum, seed = sample.int(.Machine$integer.max, 1))
 
   a_vec <- integer(n)
 
@@ -77,8 +79,6 @@ test_that("rcont_cpp ~ r2dtables (3 x 2)", {
   }
 
   a_counts <- table(a_vec)
-
-
 
   b <- r2dtable(n, r_sum, c_sum)
 
@@ -153,13 +153,15 @@ test_that("rcont_cpp ~ r2dtables (3 x 2)", {
 })
 
 
-  test_that("rcont_cpp ~ r2dtables (4 x 4)", {
+test_that("rcont3_cpp ~ r2dtables (4 x 4)", {
+
+    set.seed(393)
 
     n <- 10000
     r_sum <- c(1:4)
     c_sum <- c(4:1)
 
-    a <- rcont3_cpp(n, c_sum, r_sum, seed = sample.int(.Machine$integer.max, 1))
+    a <- rcont3_cpp(n, r_sum, c_sum, seed = sample.int(.Machine$integer.max, 1))
 
     a_vec <- character(n)
 
@@ -170,7 +172,6 @@ test_that("rcont_cpp ~ r2dtables (3 x 2)", {
     }
 
     a_counts <- table(a_vec)
-
 
 
     b <- r2dtable(n, r_sum, c_sum)
@@ -219,7 +220,6 @@ test_that("rcont_cpp ~ r2dtables (3 x 2)", {
     cts <- 1
 
     for(i in uniq) {
-
 
       if(i %in% uniq_b) {
 

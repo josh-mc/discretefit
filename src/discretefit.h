@@ -13,6 +13,24 @@ NumericVector compute_vec_1_frac(IntegerVector x,
 #endif
 
 
+#ifndef RCONT3_CPP
+#define RCONT3_CPP
+
+
+#include <Rcpp.h>
+#include <random>
+#include <algorithm>
+#include "pcg_random.h"
+using namespace Rcpp;
+
+List rcont3_cpp (int n,
+                 IntegerVector r_sums,
+                 IntegerVector c_sums,
+                 int seed);
+
+#endif
+
+
 #ifndef RMS_STAT_H
 #define RMS_STAT_H
 

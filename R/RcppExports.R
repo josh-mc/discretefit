@@ -101,6 +101,14 @@ shuffle_j_pcg <- function(x) {
     .Call('_discretefit_shuffle_j_pcg', PACKAGE = 'discretefit', x)
 }
 
+rcont32_cpp <- function(n, r_sums, c_sums, seed) {
+    .Call('_discretefit_rcont32_cpp', PACKAGE = 'discretefit', n, r_sums, c_sums, seed)
+}
+
+rcont31_cpp <- function(n, r_sums, c_sums, seed) {
+    .Call('_discretefit_rcont31_cpp', PACKAGE = 'discretefit', n, r_sums, c_sums, seed)
+}
+
 rcont3_cpp <- function(n, r_sums, c_sums, seed) {
     .Call('_discretefit_rcont3_cpp', PACKAGE = 'discretefit', n, r_sums, c_sums, seed)
 }

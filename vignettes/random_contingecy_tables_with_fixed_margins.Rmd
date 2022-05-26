@@ -43,6 +43,24 @@ plot_speed <- function(rsums, csums, title)  {
 ```
 
 
+```{r}
+plot_speed2 <- function(rsums, csums, title)  {
+  
+  speed <- bench::mark(min_iterations = 20, 
+                       check = FALSE,
+                       rcont3_cpp = rcont3_cpp(1000, csums, rsums, 2003920492),
+                       rcont32_cpp = rcont32_cpp(1000, csums, rsums, 2003920492),
+                       rcont2 = r2dtable(1000, rsums, csums)
+                       )
+
+  ggplot2::autoplot(speed) +
+    ggplot2::theme_minimal() +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ggtitle(title)
+
+}
+```
 
 
 
@@ -285,6 +303,93 @@ ggplot2::autoplot(speed) +
   ggplot2::xlab(NULL) +
   ggplot2::ylab(NULL) +
   ggplot2::ggtitle("2 x 20, n = 2000")
+```
+
+# Checking largest row
+
+```{r}
+x <- c(1000, 1000, 2000, 12, 31, 21)
+
+mat <- matrix(x, ncol = 3, byrow = TRUE)
+
+rsums <- rowSums(mat)
+csums <- colSums(mat)
+
+#rcont32_cpp(1, csums, rsums,  23432)
+
+
+plot_speed2(rsums, csums, "title")
+```
+
+```{r}
+x <- c(10000, 21, 29, 8000, 32, 23, 7000, 21, 133)
+
+mat <- matrix(x, ncol = 3, byrow = TRUE)
+
+rsums <- rowSums(mat)
+csums <- colSums(mat)
+
+plot_speed2(rsums, csums, "title")
+
+#rcont32_cpp(1, csums, rsums,  23432)
+
+speed <- bench::mark(min_iterations = 20, 
+                       check = FALSE,
+                       rcont3_cpp = rcont3_cpp(1000, csums, rsums, 2003920492),
+                       rcont32_cpp = rcont32_cpp(1000, csums, rsums, 2003920492)
+                       )
+
+  ggplot2::autoplot(speed) +
+    ggplot2::theme_minimal() +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) 
+```
+
+```{r}
+#x <- c(10000, 21, 29, 8000, 32, 23, 7000, 21, 133)
+
+x <- c(1000, 21, 998, 24, 500, 521)
+
+mat <- matrix(x, ncol = 3, byrow = TRUE)
+
+rsums <- rowSums(mat)
+csums <- colSums(mat)
+
+rcont3_cpp(1, csums, rsums, 2789234)
+```
+
+
+```{r}
+mat <- matrix(data = 1:16, ncol = 4)
+
+  r_sum <- rowSums(mat)
+  c_sum <- rowSums(mat)
+
+rcont3_cpp(1, r_sum, c_sum, seed = 1002)
+```
+
+
+```{r}
+x <- c(5, 6, 14, 9)
+
+matt <- matrix(x, ncol = 2, byrow = TRUE)
+
+rsums <- rowSums(matt)
+csums <- colSums(matt)
+
+rcont3_cpp(1, rsums, csums, 234234)
+```
+
+
+```{r}
+x <- c(5, 9, 5, 9)
+
+matt <- matrix(x, ncol = 2, byrow = TRUE)
+
+rsums <- rowSums(matt)
+csums <- colSums(matt)
+
+rcont3_cpp(1, csums, rsums, 234234)
 ```
 
 ## Examples

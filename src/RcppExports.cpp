@@ -323,6 +323,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rcont32_cpp
+List rcont32_cpp(int n, IntegerVector r_sums, IntegerVector c_sums, int seed);
+RcppExport SEXP _discretefit_rcont32_cpp(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont32_cpp(n, r_sums, c_sums, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcont31_cpp
+List rcont31_cpp(int n, IntegerVector r_sums, IntegerVector c_sums, int seed);
+RcppExport SEXP _discretefit_rcont31_cpp(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcont31_cpp(n, r_sums, c_sums, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rcont3_cpp
 List rcont3_cpp(int n, IntegerVector r_sums, IntegerVector c_sums, int seed);
 RcppExport SEXP _discretefit_rcont3_cpp(SEXP nSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP, SEXP seedSEXP) {
@@ -364,6 +392,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_discretefit_test_rcpp", (DL_FUNC) &_discretefit_test_rcpp, 1},
     {"_discretefit_shuffle_cpp_pcg", (DL_FUNC) &_discretefit_shuffle_cpp_pcg, 1},
     {"_discretefit_shuffle_j_pcg", (DL_FUNC) &_discretefit_shuffle_j_pcg, 1},
+    {"_discretefit_rcont32_cpp", (DL_FUNC) &_discretefit_rcont32_cpp, 4},
+    {"_discretefit_rcont31_cpp", (DL_FUNC) &_discretefit_rcont31_cpp, 4},
     {"_discretefit_rcont3_cpp", (DL_FUNC) &_discretefit_rcont3_cpp, 4},
     {NULL, NULL, 0}
 };

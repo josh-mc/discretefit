@@ -256,13 +256,13 @@ double ind_sim2(int reps,
   List simulations = rcont3_cpp(reps,
                                 r_sums,
                                 c_sums,
-                                seed)
+                                seed);
 
   for(int i = 0; i < reps; ++i)  {
 
-    NumericVector O = wrap(simulations[i]);
+    //NumericVector O = wrap(simulations[i]);
 
-    double sim_statistic = sum(pow((O - E), 2) / E);
+    double sim_statistic = sum(pow((simulations[i] - E), 2) / E);
 
     if (sim_statistic >= (1 - tolerance) * statistic)  {
       total_actual += 1;
