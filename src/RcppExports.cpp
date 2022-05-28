@@ -59,6 +59,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ind_fixed
+double ind_fixed(int reps, IntegerVector r_sums, IntegerVector c_sums, NumericVector E, int seed, double statistic, double tolerance);
+RcppExport SEXP _discretefit_ind_fixed(SEXP repsSEXP, SEXP r_sumsSEXP, SEXP c_sumsSEXP, SEXP ESEXP, SEXP seedSEXP, SEXP statisticSEXP, SEXP toleranceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type reps(repsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type r_sums(r_sumsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_sums(c_sumsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type E(ESEXP);
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    Rcpp::traits::input_parameter< double >::type statistic(statisticSEXP);
+    Rcpp::traits::input_parameter< double >::type tolerance(toleranceSEXP);
+    rcpp_result_gen = Rcpp::wrap(ind_fixed(reps, r_sums, c_sums, E, seed, statistic, tolerance));
+    return rcpp_result_gen;
+END_RCPP
+}
 // chisq_stat
 double chisq_stat(int draws, NumericVector vec_1_frac, NumericVector vec_2_frac);
 RcppExport SEXP _discretefit_chisq_stat(SEXP drawsSEXP, SEXP vec_1_fracSEXP, SEXP vec_2_fracSEXP) {
@@ -370,6 +387,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_discretefit_simulate_p", (DL_FUNC) &_discretefit_simulate_p, 5},
     {"_discretefit_ind_sim", (DL_FUNC) &_discretefit_ind_sim, 7},
     {"_discretefit_ind_sim2", (DL_FUNC) &_discretefit_ind_sim2, 7},
+    {"_discretefit_ind_fixed", (DL_FUNC) &_discretefit_ind_fixed, 7},
     {"_discretefit_chisq_stat", (DL_FUNC) &_discretefit_chisq_stat, 3},
     {"_discretefit_rcont_j_par_pcg", (DL_FUNC) &_discretefit_rcont_j_par_pcg, 3},
     {"_discretefit_rcont_cpp", (DL_FUNC) &_discretefit_rcont_cpp, 3},

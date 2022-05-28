@@ -262,7 +262,9 @@ double ind_sim2(int reps,
 
     //NumericVector O = wrap(simulations[i]);
 
-    double sim_statistic = sum(pow((simulations[i] - E), 2) / E);
+    NumericVector O = simulations[i];
+
+    double sim_statistic = sum(pow((O - E), 2) / E);
 
     if (sim_statistic >= (1 - tolerance) * statistic)  {
       total_actual += 1;
@@ -277,4 +279,129 @@ double ind_sim2(int reps,
 }
 
 
+// [[Rcpp::export]]
 
+double ind_fixed(int reps,
+               IntegerVector r_sums,
+               IntegerVector c_sums,
+               NumericVector E,
+               int seed,
+               double statistic,
+               double tolerance)  {
+
+  int n_r = r_sums.size();
+  int n_c = c_sums.size();
+
+  int loc_largest = 0;
+  int largest = 0;
+
+  for(int i = 0; i < n_c; ++i) {
+
+    if(largest < c_sums(i)) {
+
+      largest = c_sums(i);
+      loc_largest = i;
+
+    }
+
+  }
+
+  std::vector<int> v;
+  v.reserve(sum(c_sums));
+
+  for(int i = 0; i < n_c; ++i){
+
+    for(int j = 0; j < c_sums(i); ++ j){
+
+      v.push_back(i);
+
+    }
+  }
+
+  pcg32 g(seed);
+
+  double total_actual = 0;
+
+  for(int i = 0; i < reps; ++i)  {
+
+    if (i % 1000 == 0){
+      Rcpp::checkUserInterrupt();
+    }
+
+    // Shuffle
+
+    int n_v = v.size();
+
+    for(int i = 0; i < (n_v - c_sums(loc_largest)); ++i)  {
+
+      std::uniform_int_distribution<int> dist(i, (n_v - 1));
+      // Why minus one?
+      int num = dist(g);
+
+      std::swap(v[i], v[num]);
+
+    }
+
+    int n_q = n_c * n_r;
+    std::vector<int> q(n_q);
+
+    int a = 0;
+    int count_b = 0;
+    std::vector<int> total_cts(n_r);
+
+    for(int i = 0; i < n_c; i++) {
+
+      int l = c_sums(i);
+      int b = a + l;
+
+      if(i != loc_largest) {
+
+        std::vector<int> cts(n_r);
+
+        for(int j = a; j < b; j++) {
+
+          cts[v[j]]++;
+
+          total_cts[v[j]]++;
+
+        }
+
+        for(int k = 0; k < n_r; k++) {
+
+          q[count_b + k] = cts[k];
+
+        }
+
+      }
+
+      a += l;
+      count_b += n_r;
+
+    }
+
+    // Largest col.
+
+    for(int i = 0; i < n_r; i++) {
+
+      q[(loc_largest * n_r) + i] = r_sums[i] - total_cts[i];
+
+    }
+
+    NumericVector O = wrap(q);
+
+    double sim_statistic = sum(pow((O - E), 2) / E);
+
+    //Rcout << "The value of sim_statistic : " << sim_statistic << "\n";
+
+    if (sim_statistic >= (1 - tolerance) * statistic)  {
+      total_actual += 1;
+    }
+
+    //Rcout << "The value of total_actual : " << total_actual << "\n";
+
+  }
+
+  double p_val = (total_actual + 1) / (reps + 1);
+
+  return p_val;
+}

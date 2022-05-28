@@ -13,6 +13,10 @@ ind_sim2 <- function(reps, r_sums, c_sums, E, seed, statistic, tolerance) {
     .Call('_discretefit_ind_sim2', PACKAGE = 'discretefit', reps, r_sums, c_sums, E, seed, statistic, tolerance)
 }
 
+ind_fixed <- function(reps, r_sums, c_sums, E, seed, statistic, tolerance) {
+    .Call('_discretefit_ind_fixed', PACKAGE = 'discretefit', reps, r_sums, c_sums, E, seed, statistic, tolerance)
+}
+
 chisq_stat <- function(draws, vec_1_frac, vec_2_frac) {
     .Call('_discretefit_chisq_stat', PACKAGE = 'discretefit', draws, vec_1_frac, vec_2_frac)
 }

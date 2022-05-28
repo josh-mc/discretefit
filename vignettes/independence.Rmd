@@ -19,10 +19,11 @@ library(discretefit)
 
 plot_speed <- function(x, reps)  {
   
-  speed <- bench::mark(min_iterations = 100, 
+  speed <<- bench::mark(min_iterations = 100, 
                        check = FALSE,
                       stats = chisq.test(x, simulate.p.value = TRUE, B = reps),
-                      discretefit = chisq_ind(x, reps = reps)
+                      discretefit = chisq_ind(x, reps = reps),
+                      #discretefit2 = chisq_ind2(x, reps = reps)
                        )
 
   ggplot2::autoplot(speed) +
@@ -33,72 +34,30 @@ plot_speed <- function(x, reps)  {
 }
 ```
 
-```{r}
-ind_sim2_r <- function(x, reps)  {
 
-  n <- sum(x)
-  nr <- as.integer(nrow(x))
-  nc <- as.integer(ncol(x))
-  sr <- rowSums(x)
-  sc <- colSums(x)
-  E <- outer(sr, sc, "*") / n
 
-  STATISTIC <- sum((x - E)^2 / E)
 
-  ind_sim2(reps = reps,
-          r_sums = sc,
-          c_sums = sr,
-          as.numeric(E),
-          seed = sample.int(.Machine$integer.max, 1),
-          statistic = STATISTIC,
-          tolerance = 0)
-}
+# Tables with fixed margins
 
-```
+For tables with fixed margins, `chisq_ind` utilizes RCONT3, an algorithm that improves upon the algorithm by Boyette? referred to as RCONT. The `chisq.test` function in `stats` utilizes RCONT2 (). While these algorithms produce similar results for simulations, in many cases, RCONT3 is considerably faster than RCONT2 as implemented in the R `stats` package. 
+
+For the follow 4 x 4 matrix with 136 observations, the implementation in `discretefit` is ~ three times fasters than the implemention in `stats` (as measured by medium run times).
 
 ```{r}
 x <- matrix(data = 1:16, ncol = 4)
 
-ind_sim2_r(x, reps = 10000)
-chisq.test(x, simulate.p.value = TRUE)$p.value
-
-```
-
-
-
-
-```{r}
-x <- matrix(data = 1:16, ncol = 4)
-
+chisq_ind(x, reps = 10000)
+chisq.test(x, simulate.p.value = TRUE, B = 10000)$p.value
 plot_speed(x, reps = 10000)
-
 ```
+
+The difference is most pronounced for large, sparse contingency tables.
 
 ```{r}
-x <- c(17066, 48, 
-       14464, 38,
-       788, 5,
-       126, 1,
-       37, 1)
-
-
-x <- matrix(x, ncol = 5)
-
-plot_speed(x, reps = 1000)
-
-speed <- bench::mark(min_iterations = 100, 
-                       check = FALSE,
-                      discretefit = chisq_ind(x, reps = 1000),
-                      discretefit2 = chisq_ind(x, reps = 1000)
-                       )
-
-  ggplot2::autoplot(speed) +
-    ggplot2::theme_minimal() +
-    ggplot2::xlab(NULL) +
-    ggplot2::ylab(NULL) 
-
-
+x <- matrix(data = rep(5, 100), ncol = 10)
+plot_speed(x, reps = 10000)
 ```
+
 
 ```{r}
 x <- c(48, 17066, 
@@ -113,3 +72,26 @@ x <- matrix(x, ncol = 2, byrow = TRUE)
 plot_speed(x, reps = 1000)
 
 ```
+
+```{r}
+x <- matrix(c(1, 7, 4, 2, 49, 2), ncol = 3)
+
+x
+chisq_ind(x)
+chisq.test(x, simulate.p.value = TRUE, B = 10000)
+```
+
+
+```{r}
+
+x <- matrix(c(1, 7, 4, 2, 49, 2), ncol = 2)
+
+rs <- rowSums(x)
+cs <- colSums(x)
+
+x
+rcont3_cpp(1, rs, cs, 239023944)
+
+
+```
+

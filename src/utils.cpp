@@ -340,11 +340,144 @@ List rcont3_cpp (int n,
     }
 
     NumericVector qq = wrap(q);
-    qq.attr("dim") = Dimension(n_c, n_r);
+    qq.attr("dim") = Dimension(n_r, n_c);
     return_list(i) = qq;
 
   }
 
   return return_list;
 }
+
+
+
+
+/*
+
+// [[Rcpp::export]]
+
+std::int<vector> rcont3_cpp_setup (int n,
+                 IntegerVector r_sums,
+                 IntegerVector c_sums,
+                 int seed)  {
+
+  std::vector<int> v;
+  v.reserve(sum(r_sums));
+
+  for(int i = 0; i < n_r; ++i){
+
+    for(int j = 0; j < r_sums(i); ++ j){
+
+      v.push_back(i);
+
+    }
+  }
+
+}
+
+
+
+IntegerVector rcont3_cpp_simulate (int n,
+                                     IntegerVector r_sums,
+                                     IntegerVector c_sums,
+                                     int seed)  {
+
+    // Shuffle
+
+    int n_v = v.size();
+
+    for(int i = 0; i < (n_v - c_sums(loc_largest)); ++i)  {
+
+      std::uniform_int_distribution<int> dist(i, (n_v - 1));
+      // Why minus one?
+      int num = dist(g);
+
+      std::swap(v[i], v[num]);
+
+    }
+
+    int n_q = n_c * n_r;
+    std::vector<int> q(n_q);
+
+    int a = 0;
+    int count_b = 0;
+    std::vector<int> total_cts(n_r);
+
+    for(int i = 0; i < n_c; i++) {
+
+      int l = c_sums(i);
+      int b = a + l;
+
+      if(i != loc_largest) {
+
+        std::vector<int> cts(n_r);
+
+        for(int j = a; j < b; j++) {
+
+          cts[v[j]]++;
+
+          total_cts[v[j]]++;
+
+        }
+
+        for(int k = 0; k < n_r; k++) {
+
+          q[count_b + k] = cts[k];
+
+        }
+
+      }
+
+      a += l;
+      count_b += n_r;
+
+    }
+
+    // Largest col.
+
+    for(int i = 0; i < n_r; i++) {
+
+      q[(loc_largest * n_r) + i] = r_sums[i] - total_cts[i];
+
+    }
+
+    NumericVector qq = wrap(q);
+    qq.attr("dim") = Dimension(n_c, n_r);
+
+    return qq;
+}
+
+
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+  for(int i = 0; i < n_c; ++i) {
+
+    if(largest < c_sums(i)) {
+
+      largest = c_sums(i);
+      loc_largest = i;
+
+    }
+
+  }
+
+
+  pcg32 g(seed);
+
+for(int i = 0; i < n; ++i)  {
+
+  if (i % 1000 == 0){
+    Rcpp::checkUserInterrupt();
+  }
+
+    return_list(i) = qq;
+
+  }
+
+  return return_list;
+}
+
+ */
+
 

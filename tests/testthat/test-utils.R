@@ -1,4 +1,18 @@
 
+test_that("rcont3_cpp generates tables with right dimensions", {
+
+  x <- matrix(c(1, 7, 4, 2, 49, 2), ncol = 2)
+  #x <- matrix(c(1, 7, 4, 2), ncol = 2)
+
+  r_sum <- rowSums(x)
+  c_sum <- colSums(x)
+
+  a <- rcont3_cpp(1, r_sum, c_sum, seed = 1002)
+
+  expect_equal(a[[1]][5][1], 47)
+
+})
+
 
 test_that("rcont3_cpp tables equal rowSums/colSums", {
 
