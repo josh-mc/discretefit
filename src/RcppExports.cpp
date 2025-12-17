@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // simulate_p
 List simulate_p(int type, NumericVector vector_1, NumericVector vec_2_frac, double reps, double tolerance);
 RcppExport SEXP _discretefit_simulate_p(SEXP typeSEXP, SEXP vector_1SEXP, SEXP vec_2_fracSEXP, SEXP repsSEXP, SEXP toleranceSEXP) {
