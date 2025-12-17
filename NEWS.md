@@ -1,3 +1,8 @@
+# discretefit 0.1.3
+
+* Removed explicit C++11 requirement; package now uses the default C++ standard.
+
+
 # discretefit 0.1.2
 
 * Significantly increased speed by rewriting tabulate function.
